@@ -3,19 +3,20 @@ import { View, Text, Button } from 'react-native';
 import PropTypes from 'prop-types';
 // import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/Contacts/ContactList';
+import data from '../../resources/data.json';
 
 class Contacts extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contacts: [],
+      contacts: data.Contacts,
       nav: props.navigation,
     };
   }
 
   render() {
-    const { nav } = this.state;
+    const { nav, contacts } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <Button
@@ -25,6 +26,9 @@ class Contacts extends React.Component {
         <Button
           title="EditContact"
           onPress={() => nav.navigate('EditContact')}
+        />
+        <ContactList
+          contacts={contacts}
         />
       </View>
     );
