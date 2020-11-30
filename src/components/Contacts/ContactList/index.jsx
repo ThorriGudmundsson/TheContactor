@@ -9,7 +9,7 @@ const ContactList = ({ contacts }) => (
     <FlatList
       numColumns={1}
       data={contacts}
-      renderItems={({
+      renderItem={({
         item: {
           id, name, phoneNumber, image,
         },

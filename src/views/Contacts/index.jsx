@@ -14,13 +14,15 @@ class Contacts extends React.Component {
       contacts: data.contacts,
       nav: props.navigation,
     };
+    console.log(this.state.contacts);
   }
 
   render() {
     const { contacts, nav } = this.state;
+    console.log(contacts);
     return (
       <View style={{ flex: 1 }}>
-        <Text> This will be contacs (list) view </Text>
+        <Text> This will be contacts (list) view </Text>
         <Button
           title="contact"
           onPress={() => nav.navigate('Contact')}
