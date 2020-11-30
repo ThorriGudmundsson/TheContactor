@@ -1,21 +1,23 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import PropTypes from 'prop-types';
+import data from '../../resources/data.json';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
+import ContactList from '../../components/Contacts/ContactList';
 
 class Contacts extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contacts: [],
+      contacts: data.contacts,
       nav: props.navigation,
     };
   }
 
   render() {
-    const { nav } = this.state;
+    const { contacts, nav } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <Text> This will be contacs (list) view </Text>
@@ -30,6 +32,10 @@ class Contacts extends React.Component {
         <Button
           title="EditContact"
           onPress={() => nav.navigate('EditContact')}
+        />
+
+        <ContactList
+          contacts={contacts}
         />
       </View>
     );

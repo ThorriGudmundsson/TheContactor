@@ -6,7 +6,9 @@ import NewContact from '../views/NewContact';
 import EditContact from '../views/EditContact';
 
 const StackNavigator = createStackNavigator({
-  Contacts,
+  Contacts: {
+    screen: Contacts,
+  },
   Contact,
   NewContact,
   EditContact,
