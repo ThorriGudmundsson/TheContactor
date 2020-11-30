@@ -6,7 +6,7 @@ import {
 // import Toolbar from '../../components/Toolbar';
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../../styles/fields';
-import ic_styles from './styles';
+import iconStyles from './styles';
 
 class NewContact extends React.Component {
   constructor(props) {
@@ -26,16 +26,14 @@ class NewContact extends React.Component {
     const { name, phoneNumber } = this.state;
     return (
 
-
       <View>
-        
-          <TouchableHighlight
-            onPress={() =>{} }
-            style={ic_styles.cameraButton}
-          >
-            <AntDesign name="camera" style={ic_styles.cameraIcon} />
-          </TouchableHighlight>
 
+        <TouchableHighlight
+          onPress={() => {}}
+          style={iconStyles.cameraButton}
+        >
+          <AntDesign name="camera" style={iconStyles.cameraIcon} />
+        </TouchableHighlight>
 
         <TextInput
           style={styles.inputfield}
@@ -46,18 +44,18 @@ class NewContact extends React.Component {
 
         <TextInput
           style={styles.inputfield}
+          keyboardType="phone-pad"
           placeholder="Phone Number"
           value={phoneNumber}
           onChangeText={(text) => this.genericInputHandler('phoneNumber', text)}
         />
 
-
         <TouchableHighlight
-          onPress={() =>{} }
-        style={styles.saveButton}
-      >
-        <Text style={styles.saveButtonText}>Save</Text>
-      </TouchableHighlight>
+          onPress={() => {}}
+          style={styles.saveButton}
+        >
+          <Text style={styles.saveButtonText}>Save</Text>
+        </TouchableHighlight>
       </View>
     );
   }

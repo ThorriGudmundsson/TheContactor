@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import styles from './styles';
+// import styles from './styles';
 import ContactThumbnail from '../ContactThumbnail';
 
 const ContactList = ({ contacts }) => (
