@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
-import Toolbar from '../../components/Toolbar';
-import BoardList from '../../components/Boards/BoardList';
-import { getAllContacts } from '../../services/contactServices';
+import ContactList from '../../components/Contacts/ContactList';
+// import { getAllContacts } from '../../services/contactServices';
 import data from '../../resources/data.json';
+import styles from './styles';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -15,11 +15,27 @@ class Contacts extends React.Component {
     };
   }
 
-  componentDidMount {
-
+  componentDidMount() {
+    this.setState({
+      contacts: data.contacts,
+    });
   }
 
   render() {
-    
+    const { contacts } = this.state;
+    console.log(contacts);
+    return (
+      <View style={styles.contacts}>
+        <NavigationEvents
+          onWillFocus={(payload) => this.setState({ contacts })}
+        />
+
+        <ContactList
+          contacts={contacts}
+        />
+      </View>
+    );
   }
 }
+
+export default Contacts;

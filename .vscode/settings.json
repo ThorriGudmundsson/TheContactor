@@ -1,0 +1,8 @@
+{
+    "files.eol": "\n",
+    "eslint.codeAction.showDocumentation": {
+
+        "enable": true
+    },
+    "eslint.format.enable": true
+}
