@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import data from '../../resources/data.json';
 // import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/Contacts/ContactList';
+import { getAllContacts } from '../../services/contactServices';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -13,6 +14,13 @@ class Contacts extends React.Component {
       contacts: data.contacts,
       nav: props.navigation,
     };
+  }
+
+  async componentDidMount() {
+    const contacts = await getAllContacts();
+    this.setState({
+      contacts,
+    }, () => { console.log(this.state.contacts); });
   }
 
   render() {

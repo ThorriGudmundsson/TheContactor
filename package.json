@@ -23,7 +23,8 @@
     "react-native-screens": "~2.10.1",
     "react-navigation": "^4.4.3",
     "react-navigation-stack": "^2.10.2",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "expo-file-system": "~9.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
