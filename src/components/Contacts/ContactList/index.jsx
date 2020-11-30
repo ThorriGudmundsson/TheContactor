@@ -5,7 +5,7 @@ import styles from './styles';
 import ContactThumbnail from '../ContactThumbnail';
 
 const ContactList = ({ contacts }) => (
-  <View style={styles.listContainer}>
+  <View style={{ flex: 1 }}>
     <FlatList
       numColumns={1}
       data={contacts}

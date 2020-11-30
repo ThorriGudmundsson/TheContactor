@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 // import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/Contacts/ContactList';
@@ -23,10 +23,16 @@ class Contacts extends React.Component {
           title="New Contact"
           onPress={() => nav.navigate('NewContact')}
         />
+<<<<<<< HEAD
         <Button
           title="EditContact"
           onPress={() => nav.navigate('EditContact')}
         />
+=======
+        <View style={{height: 50, justifyContent: "center"}}>
+          <TextInput placeholder="Search"></TextInput>
+        </View>
+>>>>>>> 35bdf63aec70ac97c5893c978f8489651c5ebb66
         <ContactList
           contacts={contacts}
         />

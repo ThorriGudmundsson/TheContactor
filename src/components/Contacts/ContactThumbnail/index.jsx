@@ -26,7 +26,6 @@ const ContactThumbnail = ({
 
       <View>
         <Text style={styles.thumbnailName}>{name}</Text>
-        <Text style={styles.thumbnailText}>{phoneNumber}</Text>
       </View>
     </View>
   </TouchableOpacity>
