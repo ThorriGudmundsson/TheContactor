@@ -1,10 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
-import ContactList from '../../components/Contacts/ContactList';
-// import { getAllContacts } from '../../services/contactServices';
-import data from '../../resources/data.json';
-import styles from './styles';
+import { View, Text, Button } from 'react-native';
+import PropTypes from 'prop-types';
+// import { NavigationEvents } from 'react-navigation';
+// import Toolbar from '../../components/Toolbar';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -12,30 +10,37 @@ class Contacts extends React.Component {
 
     this.state = {
       contacts: [],
+      nav: props.navigation,
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      contacts: data.contacts,
-    });
-  }
-
   render() {
-    const { contacts } = this.state;
-    console.log(contacts);
+    const { nav } = this.state;
     return (
-      <View style={styles.contacts}>
-        <NavigationEvents
-          onWillFocus={(payload) => this.setState({ contacts })}
+      <View style={{ flex: 1 }}>
+        <Text> This will be contacs (list) view </Text>
+        <Button
+          title="contact"
+          onPress={() => nav.navigate('Contact')}
         />
-
-        <ContactList
-          contacts={contacts}
+        <Button
+          title="New Contact"
+          onPress={() => nav.navigate('NewContact')}
+        />
+        <Button
+          title="EditContact"
+          onPress={() => nav.navigate('EditContact')}
         />
       </View>
     );
   }
 }
+
+Contacts.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Contacts;
