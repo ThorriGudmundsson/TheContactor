@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text} from 'react-native';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
 
@@ -15,6 +15,7 @@ class EditContact extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <Text> This will be NewContact view </Text>
+
       </View>
     );
   }

@@ -4,14 +4,12 @@ import Contacts from '../views/Contacts';
 import Contact from '../views/Contact';
 import NewContact from '../views/NewContact';
 import EditContact from '../views/EditContact';
+import secrettests from '../views/secrettests';
 
 const StackNavigator = createStackNavigator({
-  Contacts: {
-    screen: Contacts,
-  },
-  Contact: {
-    screen: Contact,
-  },
+  // secrettests,
+  Contacts,
+  Contact,
   NewContact,
   EditContact,
 });
