@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
+import fieldsStyles from '../../styles/fields';
 
 export default StyleSheet.create({
+  ...fieldsStyles,
 
   cameraButtonZone: {
     textAlign: 'center',

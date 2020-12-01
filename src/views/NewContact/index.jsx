@@ -5,8 +5,7 @@ import {
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
 import { AntDesign } from '@expo/vector-icons';
-import styles from '../../styles/fields';
-import iconStyles from './styles';
+import styles from './styles';
 
 class NewContact extends React.Component {
   constructor(props) {
@@ -30,9 +29,9 @@ class NewContact extends React.Component {
 
         <TouchableHighlight
           onPress={() => {}}
-          style={iconStyles.cameraButton}
+          style={styles.cameraButton}
         >
-          <AntDesign name="camera" style={iconStyles.cameraIcon} />
+          <AntDesign name="camera" style={styles.cameraIcon} />
         </TouchableHighlight>
 
         <TextInput

@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  View, Text, Button, TextInput,TouchableHighlight
+  View, TextInput, TouchableHighlight
 } from 'react-native';
 import PropTypes from 'prop-types';
 // import { NavigationEvents } from 'react-navigation';
+import { AntDesign } from '@expo/vector-icons';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts } from '../../services/contactServices';
-import { AntDesign } from '@expo/vector-icons';
-import iconStyles from './styles';
+import styles from './styles';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class Contacts extends React.Component {
 
         <TouchableHighlight
           onPress={() => nav.navigate('NewContact')}
-          style={iconStyles.plusButton}
+          style={styles.plusButton}
         >
-          <AntDesign name="pluscircle" style={iconStyles.plusIcon} />
+          <AntDesign name="pluscircle" style={styles.plusIcon} />
         </TouchableHighlight>
 
         <View style={{ height: 50, justifyContent: 'center' }}>
