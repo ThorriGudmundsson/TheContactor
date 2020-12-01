@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TextInput, TouchableHighlight
+  View, TextInput, TouchableHighlight,
 } from 'react-native';
 import PropTypes from 'prop-types';
 // import { NavigationEvents } from 'react-navigation';
@@ -23,7 +23,7 @@ class Contacts extends React.Component {
     const contacts = await getAllContacts();
     this.setState({
       contacts,
-    }, () => { console.log(this.state.contacts); });
+    });
   }
 
   render() {

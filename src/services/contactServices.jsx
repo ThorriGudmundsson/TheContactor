@@ -4,19 +4,25 @@ import * as FileSystem from 'expo-file-system';
 
 const contactDirectory = `${FileSystem.documentDirectory}contacts`;
 
+export const setupContactsDirectory = async () => {
+  const dir = await FileSystem.getInfoAsync(contactDirectory);
+  if (!dir.exists) {
+    await FileSystem.makeDirectoryAsync(contactDirectory);
+  }
+};
+
 export const getAllContacts = async () => {
   const { status } = await Contacts.requestPermissionsAsync();
   if (status === 'granted') {
+    await setupContactsDirectory();
     const { data } = await Contacts.getContactsAsync({
       fields: [Contacts.Fields],
     });
 
-    if (data.length > 0) {
-      const contact = data[0];
-      return data;
-      // console.log(contact);
-      // console.log(data);
-    }
+    const contact = data[0];
+    // console.log(contact);
+    // console.log(data);
+    return data;
   }
 };
 
