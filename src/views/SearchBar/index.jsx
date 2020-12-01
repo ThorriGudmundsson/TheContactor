@@ -8,7 +8,7 @@ class Search extends React.Component {
     this.state = {
       search: '',
     };
-}
+  }
 
   updateSearch(search) {
     this.setState({ search });

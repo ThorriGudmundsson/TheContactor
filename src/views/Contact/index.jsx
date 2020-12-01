@@ -8,13 +8,32 @@ class Contact extends React.Component {
     super(props);
 
     this.state = {
+      contactId: '',
+      contactName: '',
+      contactPhoneNumber: '',
+      contactImage: '',
     };
+  }
+
+  componentDidMount() {
+    console.log(this.props.navigation.state.params);
+    const contactInfo = this.props.navigation.state.params;
+    this.setState({
+      contactId: contactInfo.contactId,
+      contactName: contactInfo.contactName,
+      contactPhoneNumber: contactInfo.contactPhoneNumber,
+      contactImage: contactInfo.contactImage,
+    });
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
         <Text> This will be contact view </Text>
+        <Text>{this.state.contactId}</Text>
+        <Text>{this.state.contactName}</Text>
+        <Text>{this.state.contactPhoneNumber}</Text>
+        <Text>{this.state.contactImage}</Text>
       </View>
     );
   }

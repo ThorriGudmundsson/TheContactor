@@ -9,7 +9,9 @@ const StackNavigator = createStackNavigator({
   Contacts: {
     screen: Contacts,
   },
-  Contact,
+  Contact: {
+    screen: Contact,
+  },
   NewContact,
   EditContact,
 });
