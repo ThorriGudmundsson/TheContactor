@@ -11,10 +11,10 @@ const contains = ({ name }, query) => {
 
 export const getUsers = (limit = 20, query = '') => new Promise((resolve, reject) => {
   if (query.length === 0) {
-    resolve(_.take(data, limit));
+    resolve(_.take(data.contacts, limit));
   } else {
     const formattedQuery = query.toLowerCase();
-    const results = _.filter(data, (user) => contains(user, formattedQuery));
+    const results = _.filter(data.contacts, (user) => contains(user, formattedQuery));
     resolve(_.take(results, limit));
   }
 });

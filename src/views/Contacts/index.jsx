@@ -8,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts } from '../../services/contactServices';
 import styles from './styles';
+import Search from '../SearchBar';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class Contacts extends React.Component {
         </TouchableHighlight>
 
         <View style={{ height: 50, justifyContent: 'center' }}>
-          <TextInput placeholder="Search" />
+          {/* <TextInput placeholder="Search" /> */}
+          <Search />
         </View>
         <ContactList
           contacts={contacts}
