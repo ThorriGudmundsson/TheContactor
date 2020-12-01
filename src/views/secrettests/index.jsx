@@ -10,7 +10,7 @@ class secrettests extends React.Component {
     super(props);
 
     this.state = {
-      whatSOever: 'geyma bara',
+      whatSOever: 'geyma bara ',
     };
   }
 
