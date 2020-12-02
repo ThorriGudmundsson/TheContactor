@@ -9,15 +9,13 @@ import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts } from '../../services/contactServices';
 import styles from './styles';
-import Search from '../SearchBar';
+// import Search from '../SearchBar';
 
 function findNextId(contacts) {
-  let nextid = 1;
+  let nextid = 0;
   contacts.forEach((contact) => {
     const idcheck = Number(contact.id);
-    if (idcheck >= nextid) {
-      nextid = idcheck + 1;
-    }
+    nextid = idcheck + 1;
   });
   return nextid;
 }
@@ -48,13 +46,9 @@ class Contacts extends React.Component {
   }
 
   updateSearch(text) {
-    console.log(this.state);
     const filteredContacts = this.state.contacts.filter(
       (contact) => contact.name.toLowerCase().startsWith(text),
     );
-    // console.log(this.state.contacts);
-    // console.log(searchText);
-    // console.log(filteredContacts);
     this.setState({
       filteredContacts,
       searchText: text,
@@ -70,7 +64,6 @@ class Contacts extends React.Component {
       contacts = this.state.contacts;
       searchText = this.state.searchText;
     }
-    console.log(contacts);
     return (
       <View style={{ flex: 1 }}>
 

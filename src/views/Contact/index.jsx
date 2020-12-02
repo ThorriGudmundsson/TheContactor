@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
@@ -18,7 +18,6 @@ class Contact extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.navigation.state.params);
     const contactInfo = this.props.navigation.state.params;
     this.setState({
       contactId: contactInfo.contactId,
@@ -29,19 +28,29 @@ class Contact extends React.Component {
   }
 
   render() {
+    const {
+      contactId, contactName, contactPhoneNumber, contactImage,
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        {/*<Text> This will be contact view </Text>*/}
-        {/*<Text>{this.state.contactId}</Text>*/}
-        <Text>{this.state.contactImage}</Text>
-        <MaterialCommunityIcons name="square-edit-outline" size={24} color="black" />
-        <Text style={styles.nameStyle}>{this.state.contactName}</Text>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: contactImage }}
+        />
+        <MaterialCommunityIcons
+          name="square-edit-outline"
+          style={styles.editButton}
+          size={30}
+          color="black"
+        />
+        <Text style={styles.nameStyle}>{contactName}</Text>
         <View style={styles.phoneNumberStyle}>
           <Text style={styles.mobileTextStyle}>
             Phone:
           </Text>
           <Text style={styles.numberTextStyle}>
-            {this.state.contactPhoneNumber}
+            {contactPhoneNumber}
           </Text>
         </View>
       </View>
