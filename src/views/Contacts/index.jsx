@@ -29,6 +29,7 @@ class Contacts extends React.Component {
       contacts: [],
       nav: props.navigation,
     };
+    this.updateContactList = this.updateContactList.bind(this);
   }
 
   async componentDidMount() {
@@ -38,13 +39,19 @@ class Contacts extends React.Component {
     });
   }
 
+  updateContactList(newContact) {
+    console.log(newContact);
+    const newContactArray = this.state.contacts.concat(newContact);
+    this.setState({ contacts: newContactArray });
+  }
+
   render() {
     const { nav, contacts } = this.state;
     return (
       <View style={{ flex: 1 }}>
 
         <TouchableHighlight
-          onPress={() => nav.navigate('NewContact', { nextId: findNextId(contacts) })}
+          onPress={() => this.props.navigation.navigate('NewContact', { nextId: findNextId(contacts), updateContactList: this.updateContactList })}
           style={styles.plusButton}
         >
           <AntDesign name="pluscircle" style={styles.plusIcon} />

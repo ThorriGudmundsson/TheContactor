@@ -8,16 +8,7 @@ import { writeContactToFile } from '../../services/contactServices';
 // import Toolbar from '../../components/Toolbar';
 import styles from './styles';
 
-function onAdd(name, phoneNumber, image, nextId, goBack) {
-  console.log(image);
-  writeContactToFile({
-    id: nextId,
-    name,
-    phoneNumber,
-    image,
-  });
-  goBack.goBack();
-}
+
 
 class NewContact extends React.Component {
   constructor(props) {
@@ -33,8 +24,21 @@ class NewContact extends React.Component {
 
   componentDidMount() {
     this.setState({
-      nextId: this.props.navigation.state.params.nextId.toString()
+      nextId: this.props.navigation.state.params.nextId.toString(),
     });
+  }
+
+  onAdd(name, phoneNumber, image, nextId) {
+    const newContact = {
+      id: nextId,
+      name,
+      phoneNumber,
+      image,
+    };
+    writeContactToFile(newContact);
+
+    this.props.navigation.state.params.updateContactList(newContact);
+    this.props.navigation.goBack();
   }
 
   genericInputHandler(name, value) {
@@ -43,9 +47,7 @@ class NewContact extends React.Component {
 
   render() {
     const { name, phoneNumber, image, nextId } = this.state;
-    console.log(nextId);
     return (
-
       <View>
         <TouchableHighlight
           onPress={() => {}}
@@ -71,12 +73,11 @@ class NewContact extends React.Component {
 
         <TouchableHighlight
           disabled={name === '' && phoneNumber === ''}
-          onPress={() => onAdd(
+          onPress={() => this.onAdd(
             name,
             phoneNumber,
             image,
             nextId,
-            this.props.navigation,
           )}
           style={styles.saveButton}
         >
