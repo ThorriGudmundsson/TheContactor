@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 // import { NavigationEvents } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
+import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts } from '../../services/contactServices';
 import styles from './styles';
@@ -27,9 +28,11 @@ class Contacts extends React.Component {
 
     this.state = {
       contacts: [],
-      nav: props.navigation,
+      searchText: '',
+      filteredContacts: null,
     };
     this.updateContactList = this.updateContactList.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   async componentDidMount() {
@@ -40,26 +43,53 @@ class Contacts extends React.Component {
   }
 
   updateContactList(newContact) {
-    console.log(newContact);
     const newContactArray = this.state.contacts.concat(newContact);
     this.setState({ contacts: newContactArray });
   }
 
+  updateSearch(text) {
+    console.log(this.state);
+    const filteredContacts = this.state.contacts.filter(
+      (contact) => contact.name.toLowerCase().startsWith(text),
+    );
+    // console.log(this.state.contacts);
+    // console.log(searchText);
+    // console.log(filteredContacts);
+    this.setState({
+      filteredContacts,
+      searchText: text,
+    });
+  }
+
   render() {
-    const { nav, contacts } = this.state;
+    let contacts; let filteredContacts; let searchText;
+    if (this.state.filteredContacts !== null) {
+      contacts = this.state.filteredContacts;
+      searchText = this.state.searchText;
+    } else {
+      contacts = this.state.contacts;
+      searchText = this.state.searchText;
+    }
+    console.log(contacts);
     return (
       <View style={{ flex: 1 }}>
 
         <TouchableHighlight
-          onPress={() => this.props.navigation.navigate('NewContact', { nextId: findNextId(contacts), updateContactList: this.updateContactList })}
+          onPress={() => this.props.navigation.navigate('NewContact', {
+            nextId: findNextId(this.state.contacts), updateContactList: this.updateContactList,
+          })}
           style={styles.plusButton}
         >
           <AntDesign name="pluscircle" style={styles.plusIcon} />
         </TouchableHighlight>
 
         <View style={{ height: 50, justifyContent: 'center' }}>
-          {/* <TextInput placeholder="Search" /> */}
-          <Search />
+          <SearchBar
+            placeholder="Type Here..."
+            onChangeText={this.updateSearch}
+            value={searchText}
+            lightTheme
+          />
         </View>
         <ContactList
           contacts={contacts}
