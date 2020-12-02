@@ -1,5 +1,6 @@
 import React from 'react';
 import { SearchBar } from 'react-native-elements';
+// import { getUsers } from '../../api';
 
 class Search extends React.Component {
   constructor(props) {
@@ -8,23 +9,24 @@ class Search extends React.Component {
     this.state = {
       search: '',
     };
-}
+  }
 
   updateSearch(search) {
     this.setState({ search });
   }
 
+
   render() {
     const { search } = this.state;
-
     return (
       <SearchBar
         placeholder="Search name..."
         onChangeText={(text) => this.updateSearch(text)}
         value={search}
         platform="default"
-        lightTheme
+        lightTheme="true"
       />
+
     );
   }
 }

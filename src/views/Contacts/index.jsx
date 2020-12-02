@@ -42,10 +42,12 @@ class Contacts extends React.Component {
         <View style={{ height: 50, justifyContent: 'center' }}>
           {/* <TextInput placeholder="Search" /> */}
           <Search />
+
         </View>
         <ContactList
           contacts={contacts}
         />
+
       </View>
     );
   }
