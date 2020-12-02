@@ -26,7 +26,7 @@ class Search extends React.Component {
         onChangeText={(text) => this.updateSearch(text)}
         value={search}
         platform="default"
-        lightTheme="true"
+        lightTheme
       />
     );
   }

@@ -24,6 +24,10 @@ export const setupContactsDirectory = async () => {
   }
 };
 
+export const cleanDirectory = async () => {
+  await FileSystem.deleteAsync(contactDirectory);
+};
+
 // Get all contacts from the contact directory
 export const readContactsFromFile = async () => {
   await setupContactsDirectory();
@@ -38,12 +42,12 @@ export const readContactsFromFile = async () => {
     }));
     contactsArray.push(JSON.parse(contact));
   }
-  // console.log(contactsArray);
   return contactsArray;
 };
 
 // Write a new contact to the contact directory
 export const writeContactToFile = async (contact) => {
+  if (contact.image === '') { contact.image = defaultImage; }
   const fileName = (contact.name.replace(/\s+/g, '-').toLowerCase() + contact.phoneNumber.replace(/-/g, ''));
   const fileUri = `${contactDirectory}/${fileName}.json`;
   await onException(() => FileSystem.writeAsStringAsync(fileUri, JSON.stringify(contact), {

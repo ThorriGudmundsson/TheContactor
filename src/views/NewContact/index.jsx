@@ -3,20 +3,11 @@ import {
   View, Text, TouchableHighlight, TextInput,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { contactsArray ,writeContactToFile } from '../../services/contactServices';
+import { writeContactToFile } from '../../services/contactServices';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
 import styles from './styles';
 
-function onAdd(n, p, write, nextid) {
-
-  write({
-    id: nextid,
-    name: n,
-    phoneNumber: p,
-    Image: '',
-  });
-}
 
 
 class NewContact extends React.Component {
@@ -26,9 +17,28 @@ class NewContact extends React.Component {
     this.state = {
       name: '',
       phoneNumber: '',
-      write: writeContactToFile,
-      nextid: this.props.navigation.state.params.nextid,
+      image: '',
+      nextId: '',
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      nextId: this.props.navigation.state.params.nextId.toString(),
+    });
+  }
+
+  onAdd(name, phoneNumber, image, nextId) {
+    const newContact = {
+      id: nextId,
+      name,
+      phoneNumber,
+      image,
+    };
+    writeContactToFile(newContact);
+
+    this.props.navigation.state.params.updateContactList(newContact);
+    this.props.navigation.goBack();
   }
 
   genericInputHandler(name, value) {
@@ -36,12 +46,9 @@ class NewContact extends React.Component {
   }
 
   render() {
-    const { name, phoneNumber, write, nextid } = this.state;
-    console.log(nextid)
+    const { name, phoneNumber, image, nextId } = this.state;
     return (
-
       <View>
-
         <TouchableHighlight
           onPress={() => {}}
           style={styles.cameraButton}
@@ -65,11 +72,12 @@ class NewContact extends React.Component {
         />
 
         <TouchableHighlight
-          onPress={() => onAdd(
+          disabled={name === '' && phoneNumber === ''}
+          onPress={() => this.onAdd(
             name,
             phoneNumber,
-            write,
-            nextid,
+            image,
+            nextId,
           )}
           style={styles.saveButton}
         >
