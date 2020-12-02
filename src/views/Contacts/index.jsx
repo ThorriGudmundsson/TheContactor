@@ -14,11 +14,10 @@ function findNextId(contacts) {
   let nextid = 1;
   contacts.forEach((contact) => {
     const idcheck = Number(contact.id);
-    if (idcheck > nextid) {
+    if (idcheck >= nextid) {
       nextid = idcheck + 1;
     }
   });
-
   return nextid;
 }
 
@@ -45,7 +44,7 @@ class Contacts extends React.Component {
       <View style={{ flex: 1 }}>
 
         <TouchableHighlight
-          onPress={() => nav.navigate('NewContact', { nextid: findNextId(contacts) })}
+          onPress={() => nav.navigate('NewContact', { nextId: findNextId(contacts) })}
           style={styles.plusButton}
         >
           <AntDesign name="pluscircle" style={styles.plusIcon} />

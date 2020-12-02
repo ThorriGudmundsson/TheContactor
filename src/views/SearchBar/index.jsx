@@ -15,7 +15,6 @@ class Search extends React.Component {
     this.setState({ search });
   }
 
-
   render() {
     const { search } = this.state;
     return (
@@ -24,7 +23,7 @@ class Search extends React.Component {
         onChangeText={(text) => this.updateSearch(text)}
         value={search}
         platform="default"
-        lightTheme="true"
+        lightTheme
       />
 
     );

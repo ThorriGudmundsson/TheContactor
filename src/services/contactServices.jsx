@@ -44,11 +44,13 @@ export const readContactsFromFile = async () => {
 
 // Write a new contact to the contact directory
 export const writeContactToFile = async (contact) => {
+  if (contact.image === '') { contact.image = defaultImage; }
   const fileName = (contact.name.replace(/\s+/g, '-').toLowerCase() + contact.phoneNumber.replace(/-/g, ''));
   const fileUri = `${contactDirectory}/${fileName}.json`;
   await onException(() => FileSystem.writeAsStringAsync(fileUri, JSON.stringify(contact), {
     encoding: FileSystem.EncodingType.UTF8,
   }));
+  console.log(contact);
 };
 
 export const getAllContacts = async () => {
