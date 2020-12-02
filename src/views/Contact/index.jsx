@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
+import styles from './styles';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -29,11 +30,19 @@ class Contact extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text> This will be contact view </Text>
-        <Text>{this.state.contactId}</Text>
-        <Text>{this.state.contactName}</Text>
-        <Text>{this.state.contactPhoneNumber}</Text>
+        {/*<Text> This will be contact view </Text>*/}
+        {/*<Text>{this.state.contactId}</Text>*/}
         <Text>{this.state.contactImage}</Text>
+        <Text style={styles.nameStyle}>{this.state.contactName}</Text>
+        <View style={styles.phoneNumberStyle}>
+        <Text style={styles.mobileTextStyle}>
+          Phone:
+        </Text>
+          <Text style={styles.numberTextStyle}>
+            {this.state.contactPhoneNumber}
+          </Text>
+        </View>
+
       </View>
     );
   }

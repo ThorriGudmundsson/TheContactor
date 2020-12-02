@@ -7,7 +7,7 @@ import EditContact from '../views/EditContact';
 import secrettests from '../views/secrettests';
 
 const StackNavigator = createStackNavigator({
-  secrettests,
+  // secrettests,
   Contacts,
   Contact,
   NewContact,
