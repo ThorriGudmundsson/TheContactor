@@ -14,6 +14,7 @@ const ContactThumbnail = ({
     onPress={() => navigate('Contact', {
       contactId: id,
       contactName: name,
+      contactPhoneNumber: phoneNumber,
       contactImage: image,
     })}
   >
@@ -32,7 +33,7 @@ const ContactThumbnail = ({
 );
 
 ContactThumbnail.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

@@ -16,9 +16,6 @@ export default StyleSheet.create({
     paddingLeft: 6,
     color: '#303F07',
     width: 260,
-//    numberOfLines: 1,
-//    ellipsizeMode: 'tail',
-
   },
   contactThumbnailContainer: {
     flexDirection: 'row',
