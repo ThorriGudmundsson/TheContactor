@@ -1,6 +1,8 @@
 import React from 'react';
 import { SearchBar } from 'react-native-elements';
-// import { getUsers } from '../../api';
+// import { getAllContacts } from '../../services/contactServices';
+// import readContactsFromFile from '../../services/contactServices';
+
 
 class Search extends React.Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class Search extends React.Component {
     this.state = {
       search: '',
     };
-  }
+}
 
   updateSearch(search) {
     this.setState({ search });
@@ -17,6 +19,7 @@ class Search extends React.Component {
 
   render() {
     const { search } = this.state;
+
     return (
       <SearchBar
         placeholder="Search name..."
@@ -25,9 +28,9 @@ class Search extends React.Component {
         platform="default"
         lightTheme
       />
-
     );
   }
 }
+
 
 export default Search;
