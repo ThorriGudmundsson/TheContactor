@@ -9,15 +9,13 @@ import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
-import Search from '../SearchBar';
+// import Search from '../SearchBar';
 
 function findNextId(contacts) {
-  let nextid = 1;
+  let nextid = 0;
   contacts.forEach((contact) => {
     const idcheck = Number(contact.id);
-    if (idcheck >= nextid) {
-      nextid = idcheck + 1;
-    }
+    nextid = idcheck + 1;
   });
   return nextid;
 }
@@ -37,9 +35,13 @@ class Contacts extends React.Component {
 
   async componentDidMount() {
     const contacts = await getAllContacts();
+<<<<<<< HEAD
     const sortedContacts = await sortContacts(contacts);
     console.log('This is it!!!!!');
     console.log(sortedContacts);
+=======
+    // await sortContacts(contacts);
+>>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
     this.setState({
       contacts,
     });
@@ -51,14 +53,16 @@ class Contacts extends React.Component {
   }
 
   updateSearch(text) {
-    console.log(this.state);
     const filteredContacts = this.state.contacts.filter(
       (contact) => sortContacts(contact.name.toLowerCase().startsWith(text)),
     );
+<<<<<<< HEAD
 
     // console.log(this.state.contacts);
     // console.log(searchText);
     // console.log(filteredContacts);
+=======
+>>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
     this.setState({
       filteredContacts,
       searchText: text,
@@ -74,7 +78,6 @@ class Contacts extends React.Component {
       contacts = this.state.contacts;
       searchText = this.state.searchText;
     }
-    console.log(contacts);
     return (
       <View style={{ flex: 1 }}>
 

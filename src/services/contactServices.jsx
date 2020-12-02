@@ -86,6 +86,7 @@ export const getAllContacts = async () => {
   return [];
 };
 
+<<<<<<< HEAD
 
 export const sortContacts = async(contacts) => {
   console.log('Halló nú byrjum við----------------');
@@ -93,4 +94,8 @@ export const sortContacts = async(contacts) => {
   // console.log(contactsSorted);
   return contactsSorted;
 
+=======
+export const sortContacts = async (contacts) => {
+  console.log(contacts);
+>>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
 };
