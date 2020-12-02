@@ -85,3 +85,12 @@ export const getAllContacts = async () => {
   }
   return [];
 };
+
+
+export const sortContacts = async(contacts) => {
+  console.log('Halló nú byrjum við----------------');
+  const contactsSorted = contacts.sort(Intl.Collator().compare);
+  // console.log(contactsSorted);
+  return contactsSorted;
+
+};

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
-import { getAllContacts } from '../../services/contactServices';
+import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 import Search from '../SearchBar';
 
@@ -37,6 +37,9 @@ class Contacts extends React.Component {
 
   async componentDidMount() {
     const contacts = await getAllContacts();
+    const sortedContacts = await sortContacts(contacts);
+    console.log('This is it!!!!!');
+    console.log(sortedContacts);
     this.setState({
       contacts,
     });
@@ -50,8 +53,9 @@ class Contacts extends React.Component {
   updateSearch(text) {
     console.log(this.state);
     const filteredContacts = this.state.contacts.filter(
-      (contact) => contact.name.toLowerCase().startsWith(text),
+      (contact) => sortContacts(contact.name.toLowerCase().startsWith(text)),
     );
+
     // console.log(this.state.contacts);
     // console.log(searchText);
     // console.log(filteredContacts);
