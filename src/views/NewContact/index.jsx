@@ -2,10 +2,22 @@ import React from 'react';
 import {
   View, Text, TouchableHighlight, TextInput,
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { contactsArray ,writeContactToFile } from '../../services/contactServices';
 // import { NavigationEvents } from 'react-navigation';
 // import Toolbar from '../../components/Toolbar';
-import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
+
+function onAdd(n, p, write, nextid) {
+
+  write({
+    id: nextid,
+    name: n,
+    phoneNumber: p,
+    Image: '',
+  });
+}
+
 
 class NewContact extends React.Component {
   constructor(props) {
@@ -14,6 +26,8 @@ class NewContact extends React.Component {
     this.state = {
       name: '',
       phoneNumber: '',
+      write: writeContactToFile,
+      nextid: this.props.navigation.state.params.nextid,
     };
   }
 
@@ -22,7 +36,8 @@ class NewContact extends React.Component {
   }
 
   render() {
-    const { name, phoneNumber } = this.state;
+    const { name, phoneNumber, write, nextid } = this.state;
+    console.log(nextid)
     return (
 
       <View>
@@ -50,7 +65,12 @@ class NewContact extends React.Component {
         />
 
         <TouchableHighlight
-          onPress={() => {}}
+          onPress={() => onAdd(
+            name,
+            phoneNumber,
+            write,
+            nextid,
+          )}
           style={styles.saveButton}
         >
           <Text style={styles.saveButtonText}>Save</Text>

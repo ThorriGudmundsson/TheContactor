@@ -10,6 +10,18 @@ import { getAllContacts } from '../../services/contactServices';
 import styles from './styles';
 import Search from '../SearchBar';
 
+function findNextId(contacts) {
+  let nextid = 1;
+  contacts.forEach((contact) => {
+    const idcheck = Number(contact.id);
+    if (idcheck > nextid) {
+      nextid = idcheck + 1;
+    }
+  });
+
+  return nextid;
+}
+
 class Contacts extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +45,7 @@ class Contacts extends React.Component {
       <View style={{ flex: 1 }}>
 
         <TouchableHighlight
-          onPress={() => nav.navigate('NewContact')}
+          onPress={() => nav.navigate('NewContact', { nextid: findNextId(contacts) })}
           style={styles.plusButton}
         >
           <AntDesign name="pluscircle" style={styles.plusIcon} />
@@ -42,12 +54,10 @@ class Contacts extends React.Component {
         <View style={{ height: 50, justifyContent: 'center' }}>
           {/* <TextInput placeholder="Search" /> */}
           <Search />
-
         </View>
         <ContactList
           contacts={contacts}
         />
-
       </View>
     );
   }
