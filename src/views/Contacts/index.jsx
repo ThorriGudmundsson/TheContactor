@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
-import { getAllContacts } from '../../services/contactServices';
+import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 // import Search from '../SearchBar';
 
@@ -35,6 +35,7 @@ class Contacts extends React.Component {
 
   async componentDidMount() {
     const contacts = await getAllContacts();
+    // await sortContacts(contacts);
     this.setState({
       contacts,
     });

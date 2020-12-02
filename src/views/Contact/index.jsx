@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { NavigationEvents } from 'react-navigation';
-// import Toolbar from '../../components/Toolbar';
-import styles from './styles';
+// import { View, Text, Image } from 'react-native';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import styles from './styles';
+import ContactProfile from '../../components/Contacts/ContactProfile';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -31,29 +30,36 @@ class Contact extends React.Component {
     const {
       contactId, contactName, contactPhoneNumber, contactImage,
     } = this.state;
+    console.log(contactImage);
     return (
-      <View style={{ flex: 1 }}>
-        <Image
-          style={styles.image}
-          resizeMode="cover"
-          source={{ uri: contactImage }}
-        />
-        <MaterialCommunityIcons
-          name="square-edit-outline"
-          style={styles.editButton}
-          size={30}
-          color="black"
-        />
-        <Text style={styles.nameStyle}>{contactName}</Text>
-        <View style={styles.phoneNumberStyle}>
-          <Text style={styles.mobileTextStyle}>
-            Phone:
-          </Text>
-          <Text style={styles.numberTextStyle}>
-            {contactPhoneNumber}
-          </Text>
-        </View>
-      </View>
+      <ContactProfile
+        id={contactId}
+        name={contactName}
+        phoneNumber={contactPhoneNumber}
+        image={contactImage}
+      />
+      // <View style={{ flex: 1 }}>
+      //   <Image
+      //     style={styles.image}
+      //     resizeMode="cover"
+      //     source={{ uri: contactImage }}
+      //   />
+      //   <MaterialCommunityIcons
+      //     name="square-edit-outline"
+      //     style={styles.editButton}
+      //     size={30}
+      //     color="black"
+      //   />
+      //   <Text style={styles.nameStyle}>{contactName}</Text>
+      //   <View style={styles.phoneNumberStyle}>
+      //     <Text style={styles.mobileTextStyle}>
+      //       Phone:
+      //     </Text>
+      //     <Text style={styles.numberTextStyle}>
+      //       {contactPhoneNumber}
+      //     </Text>
+      //   </View>
+      // </View>
     );
   }
 }

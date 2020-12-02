@@ -85,3 +85,7 @@ export const getAllContacts = async () => {
   }
   return [];
 };
+
+export const sortContacts = async (contacts) => {
+  console.log(contacts);
+};
