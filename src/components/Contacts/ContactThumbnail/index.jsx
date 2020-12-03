@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ContactThumbnail = ({
-  id, name, phoneNumber, image, updateContactList, navigation: { navigate },
+  id, name, phoneNumber, image, onEditedContact, navigation: { navigate },
 }) => (
   <TouchableOpacity
     activeOpacity={0.7}
@@ -16,11 +16,10 @@ const ContactThumbnail = ({
       contactName: name,
       contactPhoneNumber: phoneNumber,
       contactImage: image,
-      updateContactList,
+      onEditedContact,
     })}
   >
     <View style={styles.contactThumbnailContainer}>
-      <Text>{id}</Text>
       <Image
         style={styles.image}
         resizeMode="cover"
@@ -39,7 +38,7 @@ ContactThumbnail.propTypes = {
   name: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  updateContactList: PropTypes.func.isRequired,
+  onEditedContact: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import styles from './styles';
 import ContactThumbnail from '../ContactThumbnail';
 
-const ContactList = ({ contacts, updateContactList }) => (
+const ContactList = ({ contacts, onEditedContact }) => (
   <View style={{ flex: 1 }}>
     <FlatList
       numColumns={1}
@@ -19,6 +19,7 @@ const ContactList = ({ contacts, updateContactList }) => (
           name={name}
           phoneNumber={phoneNumber}
           image={image}
+          onEditedContact={onEditedContact}
         />
       )}
       keyExtractor={(contact) => contact.id.toString()}
@@ -33,7 +34,7 @@ ContactList.propTypes = {
     phoneNumber: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   })).isRequired,
-  updateContactList: PropTypes.func.isRequired,
+  onEditedContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;

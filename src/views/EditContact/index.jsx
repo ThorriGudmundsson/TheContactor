@@ -16,28 +16,35 @@ class EditContact extends React.Component {
       name: '',
       phoneNumber: '',
       image: '',
+      oldContact: {},
     };
   }
 
   componentDidMount() {
     this.setState({
-      id: this.props.navigation.state.params.contactId,
-      name: this.props.navigation.state.params.contactName,
-      phoneNumber: this.props.navigation.state.params.contactPhoneNumber,
-      image: this.props.navigation.state.params.contactImage,
+      id: this.props.navigation.state.params.id,
+      name: this.props.navigation.state.params.name,
+      phoneNumber: this.props.navigation.state.params.phoneNumber,
+      image: this.props.navigation.state.params.image,
+      oldContact: {
+        id: this.props.navigation.state.params.id,
+        name: this.props.navigation.state.params.name,
+        phoneNumber: this.props.navigation.state.params.phoneNumber,
+        image: this.props.navigation.state.params.image,
+      },
     });
   }
 
-  onEdit(id, name, phoneNumber, image) {
+  onEdit(id, name, phoneNumber, image, oldContact) {
     const editedContact = {
       id,
       name,
       phoneNumber,
       image,
     };
-    editContactFile(editedContact);
+    editContactFile(editedContact, oldContact);
 
-    this.props.navigation.state.params.updateContactList(editedContact);
+    this.props.navigation.state.params.onEditedContact(editedContact);
     this.props.navigation.goBack();
   }
 
@@ -47,7 +54,7 @@ class EditContact extends React.Component {
 
   render() {
     const {
-      id, name, phoneNumber, image,
+      id, name, phoneNumber, image, oldContact,
     } = this.state;
     return (
       <View>
@@ -59,7 +66,6 @@ class EditContact extends React.Component {
           <Icon
             name="edit"
             containerStyle={styles.icon}
-            onPress={console.log('I was clicked')}
           />
         </View>
 
@@ -85,6 +91,7 @@ class EditContact extends React.Component {
             name,
             phoneNumber,
             image,
+            oldContact,
           )}
           style={styles.saveButton}
         >

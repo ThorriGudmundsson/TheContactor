@@ -25,6 +25,7 @@ class Contacts extends React.Component {
     };
     this.updateContactList = this.updateContactList.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
+    this.onEditedContact = this.onEditedContact.bind(this);
   }
 
   async componentDidMount() {
@@ -33,6 +34,21 @@ class Contacts extends React.Component {
     this.setState({
       contacts: sortedContacts,
     });
+  }
+
+  async onEditedContact(newContact) {
+    console.log('CONTACTS VIEW ONEDITEDCONTACT');
+    console.log(newContact);
+    const editContactArray = this.state.contacts;
+    for (let i = 0; i < editContactArray.length; i += 1) {
+      if (editContactArray[i].id === newContact.id) {
+        editContactArray[i] = newContact;
+        break;
+      }
+    }
+    const sortedContacts = await sortContacts(editContactArray);
+    console.log(sortedContacts);
+    this.setState({ contact: sortedContacts });
   }
 
   async updateContactList(newContact) {
@@ -61,7 +77,6 @@ class Contacts extends React.Component {
       contacts = this.state.contacts;
       searchText = this.state.searchText;
     }
-    console.log(this.updateContactList);
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.listHead}>
@@ -85,7 +100,7 @@ class Contacts extends React.Component {
 
         <ContactList
           contacts={contacts}
-          updateContactList={this.updateContactList}
+          updateContactList={this.onEditedContact}
         />
       </View>
     );

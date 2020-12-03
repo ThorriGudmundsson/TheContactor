@@ -21,6 +21,8 @@ export const setupContactsDirectory = async () => {
   const dir = await FileSystem.getInfoAsync(contactDirectory);
   if (!dir.exists) {
     await FileSystem.makeDirectoryAsync(contactDirectory);
+  } else {
+    return false;
   }
 };
 
@@ -55,11 +57,16 @@ export const writeContactToFile = async (contact) => {
   }));
 };
 
-export const editContactFile = async (contact) => {
-  const fileName = (contact.name.replace(/\s+/g, '-').toLowerCase() + contact.phoneNumber.replace(/-/g, ''));
-  const fileUri = `${contactDirectory}/${fileName}.json`;
-  await onException(() => FileSystem.deleteAsync(fileUri));
-  await onException(() => FileSystem.writeAsStringAsync(fileUri, JSON.stringify(contact), {
+export const editContactFile = async (newContact, oldContact) => {
+  // console.log(oldContact);
+  // console.log(newContact);
+  const oldFileName = (oldContact.name.replace(/\s+/g, '-').toLowerCase() + oldContact.phoneNumber.replace(/-/g, ''));
+  const oldFileUri = `${contactDirectory}/${oldFileName}.json`;
+  await onException(() => FileSystem.deleteAsync(oldFileUri));
+
+  const newFileName = (newContact.name.replace(/\s+/g, '-').toLowerCase() + newContact.phoneNumber.replace(/-/g, ''));
+  const newFileUri = `${contactDirectory}/${newFileName}.json`;
+  await onException(() => FileSystem.writeAsStringAsync(newFileUri, JSON.stringify(newContact), {
     encoding: FileSystem.EncodingType.UTF8,
   }));
 };
@@ -67,29 +74,31 @@ export const editContactFile = async (contact) => {
 export const getAllContacts = async () => {
   const { status } = await Contacts.requestPermissionsAsync();
   if (status === 'granted') {
-    await setupContactsDirectory();
-
-    const { data } = await Contacts.getContactsAsync({
-      fields: [
-        Contacts.Fields.Name,
-        Contacts.Fields.PhoneNumbers,
-        Contacts.Fields.Image,
-      ],
-      sort: Contacts.SortTypes.FirstName, // Sorts alphabetically
-    });
-
-    const contactsArray = [];
-    // Writes all the contacts from phone into the contact directory
-    for (let i = 0; i < data.length; i += 1) {
-      contactsArray.push({
-        id: data[i].id,
-        name: data[i].name,
-        phoneNumber: data[i].phoneNumbers[0].number,
-        image: (data[i].imageAvailable ? data[i].image.uri : defaultImage),
+    // If you need to setup directory
+    if (await setupContactsDirectory() !== false) {
+      const { data } = await Contacts.getContactsAsync({
+        fields: [
+          Contacts.Fields.Name,
+          Contacts.Fields.PhoneNumbers,
+          Contacts.Fields.Image,
+        ],
+        sort: Contacts.SortTypes.FirstName, // Sorts alphabetically
       });
-      await writeContactToFile(contactsArray[i]);
+
+      const contactsArray = [];
+      // Writes all the contacts from phone into the contact directory
+      for (let i = 0; i < data.length; i += 1) {
+        contactsArray.push({
+          id: data[i].id,
+          name: data[i].name,
+          phoneNumber: data[i].phoneNumbers[0].number,
+          image: (data[i].imageAvailable ? data[i].image.uri : defaultImage),
+        });
+        await writeContactToFile(contactsArray[i]);
+      }
+      // Return the contacts from the contact directory
+      return readContactsFromFile();
     }
-    // Return the contacts from the contact directory
     return readContactsFromFile();
   }
   return [];
