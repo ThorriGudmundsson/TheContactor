@@ -15,25 +15,26 @@ class NewContact extends React.Component {
     this.state = {
       name: '',
       phoneNumber: '',
-      image: '',
+      image: 'noimage', // to avoid emty uri statements
       nextId: '',
       isAddModalOpen: false,
-      isImage: false,
     };
   }
 
   componentDidMount() {
     this.setState({
-      nextId: this.props.navigation.state.params.nextId.toString(),
+      nextId: this.props.navigation.state.params.nextId,
     });
   }
 
   onAdd(name, phoneNumber, image, nextId) {
+    let img = image;
+    if (img === 'noimage') { img = ''; }
     const newContact = {
       id: nextId,
       name,
       phoneNumber,
-      image,
+      image: img,
     };
     writeContactToFile(newContact);
 
@@ -52,7 +53,6 @@ class NewContact extends React.Component {
   }
 
   async selectFromCameraRoll() {
-    console.log('some thing from selectFromCameraRoll');
     this.image = await selectFromCameraRoll();
     this.setState({ image: this.image });
     this.setState({ isAddModalOpen: false });
@@ -60,7 +60,7 @@ class NewContact extends React.Component {
 
   render() {
     const {
-      name, phoneNumber, image, nextId, isAddModalOpen, isImage,
+      name, phoneNumber, image, nextId, isAddModalOpen,
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -89,6 +89,7 @@ class NewContact extends React.Component {
           <AntDesign name="camera" style={styles.cameraIcon} />
 
         </TouchableHighlight>
+
 
         <TextInput
           style={styles.inputfield}

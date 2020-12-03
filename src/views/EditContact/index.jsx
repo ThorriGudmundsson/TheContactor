@@ -2,8 +2,10 @@ import React from 'react';
 import {
   View, Text, TouchableHighlight, TextInput, Image,
 } from 'react-native';
-// import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { Icon } from 'react-native-elements';
+import AddModal from '../../components/AddModal';
+import { takePhoto, selectFromCameraRoll } from '../../services/imageServices';
 import { editContactFile } from '../../services/contactServices';
 import styles from './styles';
 
@@ -15,8 +17,9 @@ class EditContact extends React.Component {
       id: '',
       name: '',
       phoneNumber: '',
-      image: '',
+      image: 'noimage', // to avoid emty uri statements
       oldContact: {},
+      isAddModalOpen: false,
     };
   }
 
@@ -52,27 +55,55 @@ class EditContact extends React.Component {
     this.setState({ [name]: value });
   }
 
+  async takePhoto() {
+    this.image = await takePhoto();
+    this.setState({ image: this.image });
+    this.setState({ isAddModalOpen: false });
+  }
+
+  async selectFromCameraRoll() {
+    this.image = await selectFromCameraRoll();
+    this.setState({ image: this.image });
+    this.setState({ isAddModalOpen: false });
+  }
+
   render() {
     const {
-      id, name, phoneNumber, image, oldContact,
+      id, name, phoneNumber, image, oldContact, isAddModalOpen,
     } = this.state;
     return (
       <View>
-        <View>
-          <Image
-            source={{ uri: this.state.image }}
-            style={styles.profileImage}
-          />
-          <Icon
-            name="edit"
-            containerStyle={styles.icon}
-          />
-        </View>
+        <TouchableHighlight
+          disabled={name === '' && phoneNumber === ''}
+          onPress={() => this.onEdit(
+            id,
+            name,
+            phoneNumber,
+            image,
+            oldContact,
+          )}
+          style={styles.topSaveButton}
+        >
+          <Text style={styles.topSaveButtonText}>Save</Text>
+        </TouchableHighlight>
+        <Image
+          source={{ uri: image }}
+          style={styles.image}
+        />
+
+        <TouchableHighlight
+          onPress={() => this.setState({ isAddModalOpen: true })}
+          style={styles.cameraButton}
+        >
+          <AntDesign name="camera" style={styles.cameraIcon} />
+
+        </TouchableHighlight>
+
 
         <TextInput
           style={styles.inputfield}
           placeholder="Name"
-          value={this.state.name}
+          value={name}
           onChangeText={(text) => this.genericInputHandler('name', text)}
         />
 
@@ -80,7 +111,7 @@ class EditContact extends React.Component {
           style={styles.inputfield}
           keyboardType="phone-pad"
           placeholder="Phone Number"
-          value={this.state.phoneNumber}
+          value={phoneNumber}
           onChangeText={(text) => this.genericInputHandler('phoneNumber', text)}
         />
 
@@ -97,6 +128,12 @@ class EditContact extends React.Component {
         >
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableHighlight>
+        <AddModal
+          isOpen={isAddModalOpen}
+          closeModal={() => this.setState({ isAddModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
+          selectFromCameraRoll={() => this.selectFromCameraRoll()}
+        />
       </View>
     );
   }

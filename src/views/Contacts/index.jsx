@@ -10,8 +10,14 @@ import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 
 function findNextId(contacts) {
-  const nextid = contacts.length + 1;
-  return toString(nextid);
+  let nextid = 0;
+  contacts.forEach((contact) => {
+    if (Number(contact.id) > nextid) {
+      nextid = Number(contact.id);
+    }
+  });
+  nextid += 1;
+  return nextid.toString();
 }
 
 class Contacts extends React.Component {
@@ -79,6 +85,7 @@ class Contacts extends React.Component {
     }
     return (
       <View style={{ flex: 1 }}>
+
         <View style={styles.listHead}>
           <View style={{ width: '75%' }}>
             <SearchBar
@@ -90,7 +97,7 @@ class Contacts extends React.Component {
           </View>
           <TouchableHighlight
             onPress={() => this.props.navigation.navigate('NewContact', {
-              nextId: findNextId(this.state.contacts), updateContactList: this.updateContactList,
+              nextId: findNextId(contacts), updateContactList: this.updateContactList,
             })}
             style={styles.plusButton}
           >
