@@ -35,13 +35,9 @@ class Contacts extends React.Component {
 
   async componentDidMount() {
     const contacts = await getAllContacts();
-<<<<<<< HEAD
     const sortedContacts = await sortContacts(contacts);
     console.log('This is it!!!!!');
     console.log(sortedContacts);
-=======
-    // await sortContacts(contacts);
->>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
     this.setState({
       contacts,
     });
@@ -56,13 +52,10 @@ class Contacts extends React.Component {
     const filteredContacts = this.state.contacts.filter(
       (contact) => sortContacts(contact.name.toLowerCase().startsWith(text)),
     );
-<<<<<<< HEAD
 
     // console.log(this.state.contacts);
     // console.log(searchText);
     // console.log(filteredContacts);
-=======
->>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
     this.setState({
       filteredContacts,
       searchText: text,
