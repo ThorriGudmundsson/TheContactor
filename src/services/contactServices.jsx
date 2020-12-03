@@ -91,7 +91,7 @@ export const getAllContacts = async () => {
         contactsArray.push({
           id: data[i].id,
           name: data[i].name,
-          phoneNumber: data[i].phoneNumbers[0].number,
+          phoneNumber: (data[i].phoneNumbers === undefined ? '( no number )' : data[i].phoneNumbers[0].number),
           image: (data[i].imageAvailable ? data[i].image.uri : defaultImage),
         });
         await writeContactToFile(contactsArray[i]);
