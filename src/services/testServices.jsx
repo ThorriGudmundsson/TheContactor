@@ -5,6 +5,7 @@ const rootDir = `${FileSystem.documentDirectory}`; // the root uri
 export const whatever = FileSystem.getInfoAsync(rootDir); // the root info
 
 const uriDirectory = `${FileSystem.documentDirectory}testDir`; // DIRECTORY NAME
+const cDirectory = `${FileSystem.documentDirectory}contacts`
 
 export const writeSomething = async () => {
   const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
@@ -26,10 +27,27 @@ export const writeSomething = async () => {
 
 export const killit = async () => {
   // delete the Directory and its content
-  const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
+  const theDirectory = await FileSystem.getInfoAsync(cDirectory);
   if (theDirectory.exists) {
-    await FileSystem.deleteAsync(uriDirectory);
+    await FileSystem.deleteAsync(cDirectory);
   }
 
   console.log(await FileSystem.readDirectoryAsync(rootDir));
+};
+
+export const testsomthing = async () => {
+  //const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
+
+  console.log(rootDir); // read the file
+  const tt = await FileSystem.readDirectoryAsync(cDirectory);
+  console.log(tt[0]);
+
+
+  const somefile = `${cDirectory}/${tt[3]}`; // FILE NAME and uri
+
+  console.log(await FileSystem.readAsStringAsync(somefile)); // read the file
+
+
+
+
 };

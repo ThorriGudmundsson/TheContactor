@@ -3,7 +3,11 @@ import {
   View, Text, TouchableHighlight, TextInput,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import AddModal from '../../components/AddModal';
+import { takePhoto } from '../../services/imageServices';
 import { writeContactToFile } from '../../services/contactServices';
+
+
 import styles from './styles';
 
 class NewContact extends React.Component {
@@ -15,6 +19,7 @@ class NewContact extends React.Component {
       phoneNumber: '',
       image: '',
       nextId: '',
+      isAddModalOpen: false,
     };
   }
 
@@ -41,12 +46,22 @@ class NewContact extends React.Component {
     this.setState({ [name]: value });
   }
 
+  async takePhoto() {
+    this.image = await takePhoto();
+    console.log(this.image);
+    this.setState({ image: this.image });
+  }
+
+  selectFromCamerRoll() {
+
+  }
+
   render() {
-    const { name, phoneNumber, image, nextId } = this.state;
+    const { name, phoneNumber, image, nextId, isAddModalOpen } = this.state;
     return (
       <View>
         <TouchableHighlight
-          onPress={() => {}}
+          onPress={() => this.setState({ isAddModalOpen: true })}
           style={styles.cameraButton}
         >
           <AntDesign name="camera" style={styles.cameraIcon} />
@@ -79,6 +94,12 @@ class NewContact extends React.Component {
         >
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableHighlight>
+        <AddModal
+          isOpen={isAddModalOpen}
+          closeModal={() => this.setState({ isAddModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
+          selectFromCamerRoll={() => this.selectFromCamerRoll()}
+        />
       </View>
     );
   }
