@@ -59,7 +59,9 @@ class NewContact extends React.Component {
   }
 
   render() {
-    const { name, phoneNumber, image, nextId, isAddModalOpen, isImage } = this.state;
+    const {
+      name, phoneNumber, image, nextId, isAddModalOpen, isImage,
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <TouchableHighlight
@@ -87,10 +89,6 @@ class NewContact extends React.Component {
           <AntDesign name="camera" style={styles.cameraIcon} />
 
         </TouchableHighlight>
-
-
-
-
 
         <TextInput
           style={styles.inputfield}
