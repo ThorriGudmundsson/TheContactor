@@ -2,10 +2,10 @@ import React from 'react';
 import {
   View, Text, Image, TouchableOpacity,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 // import ContactProfile from '../../components/Contacts/ContactProfile';
-import makeCall from '../../components/makePhoneCall/phoneCall';
+import CallContact from '../../components/makePhoneCall/phoneCall';
 import { getAllContacts } from '../../services/contactServices';
 
 class Contact extends React.Component {
@@ -17,9 +17,7 @@ class Contact extends React.Component {
       name: '',
       phoneNumber: '',
       image: '',
-      contacts: [],
     };
-    // this.getContacts = this.getContacts.bind(this);
     this.onEditedContact = this.onEditedContact.bind(this);
   }
 
@@ -44,16 +42,12 @@ class Contact extends React.Component {
     return newContact;
   }
 
-  // async getContacts() {
-  //   const contacts = await getAllContacts();
-  //   this.setState({ contacts });
-  // }
-
   render() {
     const {
       id, name, phoneNumber, image,
     } = this.state;
     const { onEditedContact } = this.props.navigation.state.params;
+    console.log(phoneNumber);
     return (
       <View style={{ flex: 1 }}>
         <Image
@@ -79,7 +73,7 @@ class Contact extends React.Component {
           <Text style={styles.mobileTextStyle}>
             Phone:
           </Text>
-          <TouchableOpacity onPress={makeCall}>
+          <TouchableOpacity onPress={() => CallContact(phoneNumber)}>
             <Text style={styles.numberTextStyle}>
               {phoneNumber}
             </Text>
