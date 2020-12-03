@@ -1,14 +1,19 @@
 import React from 'react';
-import {  Linking, Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
+import { getAllContacts } from '../../services/contactServices';
 
 export const makeCall = () => {
   let phoneNumber = '';
+  const contacts = getAllContacts();
 
   if (Platform.OS === 'android') {
-    phoneNumber = 'tel:${1234567890}';
+
+    phoneNumber = 'tel:${contacts.phoneNumber}';
+
   } else {
-    phoneNumber = 'telprompt:${1234567890}';
+    phoneNumber = 'telprompt:${contacts.phoneNumber}';
   }
 
   Linking.openURL(phoneNumber);
+
 };
