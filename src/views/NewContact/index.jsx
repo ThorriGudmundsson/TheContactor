@@ -59,7 +59,9 @@ class NewContact extends React.Component {
   }
 
   render() {
-    const { name, phoneNumber, image, nextId, isAddModalOpen } = this.state;
+    const {
+      name, phoneNumber, image, nextId, isAddModalOpen,
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <TouchableHighlight
