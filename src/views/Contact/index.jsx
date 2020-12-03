@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  View, Text, Image, TouchableOpacity,
+  View, Text, Image, TouchableOpacity, TouchableHighlight
 } from 'react-native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 // import ContactProfile from '../../components/Contacts/ContactProfile';
 import CallContact from '../../components/makePhoneCall/phoneCall';
-import { getAllContacts } from '../../services/contactServices';
+//import { getAllContacts } from '../../services/contactServices';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -50,35 +50,39 @@ class Contact extends React.Component {
     console.log(phoneNumber);
     return (
       <View style={{ flex: 1 }}>
+        <View style={styles.topSaveButton}>
+          <MaterialCommunityIcons
+            name="square-edit-outline"
+            style={styles.editButton}
+            size={30}
+            color="black"
+            onPress={() => this.props.navigation.navigate('EditContact', {
+              onEditedContact: this.onEditedContact,
+              id,
+              name,
+              phoneNumber,
+              image,
+            })}
+      />
+      </View>
         <Image
           style={styles.image}
           resizeMode="cover"
           source={{ uri: image }}
         />
-        <MaterialCommunityIcons
-          name="square-edit-outline"
-          style={styles.editButton}
-          size={30}
-          color="black"
-          onPress={() => this.props.navigation.navigate('EditContact', {
-            onEditedContact: this.onEditedContact,
-            id,
-            name,
-            phoneNumber,
-            image,
-          })}
-        />
         <Text style={styles.nameStyle}>{name}</Text>
-        <View style={styles.phoneNumberStyle}>
-          <Text style={styles.mobileTextStyle}>
-            Phone:
+
+        <TouchableOpacity
+          style={styles.phoneNumberStyle}
+          onPress={() => CallContact(phoneNumber)}>
+
+          <AntDesign name="phone" style={styles.mobileTextStyle} />
+
+          <Text style={styles.numberTextStyle}>
+            {phoneNumber}
           </Text>
-          <TouchableOpacity onPress={() => CallContact(phoneNumber)}>
-            <Text style={styles.numberTextStyle}>
-              {phoneNumber}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
+
       </View>
     );
   }
