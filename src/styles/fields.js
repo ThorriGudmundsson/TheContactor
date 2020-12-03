@@ -20,8 +20,23 @@ export default StyleSheet.create({
   saveButtonText: {
     fontSize: 20,
     fontWeight: '900',
-    textAlign: 'center',
     color: '#fff',
+    textAlign: 'center',
+
+  },
+  topSaveButton: {
+    paddingTop: 5,
+    paddingRight: 20,
+    height: 40,
+    backgroundColor: '#A1B078',
+
+
+  },
+  topSaveButtonText: {
+    fontSize: 20,
+    fontWeight: '900',
+    textAlign: 'right',
+    color: '#303F07',
   },
   helpText: {
     fontSize: 20,

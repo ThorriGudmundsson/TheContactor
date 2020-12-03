@@ -64,24 +64,25 @@ class Contacts extends React.Component {
     console.log(this.updateContactList);
     return (
       <View style={{ flex: 1 }}>
-
-        <TouchableHighlight
-          onPress={() => this.props.navigation.navigate('NewContact', {
-            nextId: findNextId(contacts), updateContactList: this.updateContactList,
-          })}
-          style={styles.plusButton}
-        >
-          <AntDesign name="pluscircle" style={styles.plusIcon} />
-        </TouchableHighlight>
-
-        <View style={{ height: 50, justifyContent: 'center' }}>
-          <SearchBar
-            placeholder="Type Here..."
-            onChangeText={this.updateSearch}
-            value={searchText}
-            lightTheme
-          />
+        <View style={styles.listHead}>
+          <View style={{ width: '75%' }}>
+            <SearchBar
+              placeholder="Search contact..."
+              onChangeText={this.updateSearch}
+              value={searchText}
+              lightTheme
+            />
+          </View>
+          <TouchableHighlight
+            onPress={() => this.props.navigation.navigate('NewContact', {
+              nextId: findNextId(this.state.contacts), updateContactList: this.updateContactList,
+            })}
+            style={styles.plusButton}
+          >
+            <AntDesign name="pluscircle" style={styles.plusIcon} />
+          </TouchableHighlight>
         </View>
+
         <ContactList
           contacts={contacts}
           updateContactList={this.updateContactList}

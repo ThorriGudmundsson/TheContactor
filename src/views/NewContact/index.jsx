@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  View, Text, TouchableHighlight, TextInput,
+  View, Text, TouchableHighlight, TextInput, Image,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import AddModal from '../../components/AddModal';
+import { takePhoto, selectFromCameraRoll } from '../../services/imageServices';
 import { writeContactToFile } from '../../services/contactServices';
 import styles from './styles';
 
@@ -15,6 +17,8 @@ class NewContact extends React.Component {
       phoneNumber: '',
       image: '',
       nextId: '',
+      isAddModalOpen: false,
+      isImage: false,
     };
   }
 
@@ -41,16 +45,52 @@ class NewContact extends React.Component {
     this.setState({ [name]: value });
   }
 
+  async takePhoto() {
+    this.image = await takePhoto();
+    this.setState({ image: this.image });
+    this.setState({ isAddModalOpen: false });
+  }
+
+  async selectFromCameraRoll() {
+    console.log('some thing from selectFromCameraRoll');
+    this.image = await selectFromCameraRoll();
+    this.setState({ image: this.image });
+    this.setState({ isAddModalOpen: false });
+  }
+
   render() {
-    const { name, phoneNumber, image, nextId } = this.state;
+    const { name, phoneNumber, image, nextId, isAddModalOpen, isImage } = this.state;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <TouchableHighlight
-          onPress={() => {}}
+          disabled={name === '' && phoneNumber === ''}
+          onPress={() => this.onAdd(
+            name,
+            phoneNumber,
+            image,
+            nextId,
+          )}
+          style={styles.topSaveButton}
+        >
+          <Text style={styles.topSaveButtonText}>Save</Text>
+        </TouchableHighlight>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: image }}
+        />
+
+        <TouchableHighlight
+          onPress={() => this.setState({ isAddModalOpen: true })}
           style={styles.cameraButton}
         >
           <AntDesign name="camera" style={styles.cameraIcon} />
+
         </TouchableHighlight>
+
+
+
+
 
         <TextInput
           style={styles.inputfield}
@@ -79,6 +119,12 @@ class NewContact extends React.Component {
         >
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableHighlight>
+        <AddModal
+          isOpen={isAddModalOpen}
+          closeModal={() => this.setState({ isAddModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
+          selectFromCameraRoll={() => this.selectFromCameraRoll()}
+        />
       </View>
     );
   }
