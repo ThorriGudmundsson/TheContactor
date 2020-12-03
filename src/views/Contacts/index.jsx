@@ -10,14 +10,8 @@ import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 
 function findNextId(contacts) {
-  // let nextid = 0;
-  // contacts.forEach((contact) => {
-  //   const idcheck = Number(contact.id);
-  //   nextid += idcheck + 1;
-  // });
-  const nextid = Math.max(...contacts.map((contact) => contact.Number(contact.id)));
-  console.log(nextid);
-  // return nextid;
+  const nextid = Math.max(...contacts.map((contact) => Number(contact.id))) + 1;
+  return toString(nextid);
 }
 
 class Contacts extends React.Component {
@@ -36,8 +30,6 @@ class Contacts extends React.Component {
   async componentDidMount() {
     const contacts = await getAllContacts();
     const sortedContacts = await sortContacts(contacts);
-    console.log('This is it!!!!!');
-    // console.log(sortedContacts);
     this.setState({
       contacts: sortedContacts,
     });
