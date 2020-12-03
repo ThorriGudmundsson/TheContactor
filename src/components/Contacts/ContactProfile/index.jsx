@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ContactProfile = ({
-  id, name, phoneNumber, image, navigation: { navigate },
+  id, name, phoneNumber, image, updateContactList, navigation: { navigate },
 }) => (
   <View style={{ flex: 1 }}>
     <Image
@@ -24,6 +24,7 @@ const ContactProfile = ({
         contactName: name,
         contactPhoneNumber: phoneNumber,
         contactImage: image,
+        updateContactList,
       })}
     />
     <Text style={styles.nameStyle}>{name}</Text>
@@ -43,6 +44,7 @@ ContactProfile.propTypes = {
   name: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  updateContactList: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

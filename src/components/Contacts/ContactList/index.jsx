@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import styles from './styles';
 import ContactThumbnail from '../ContactThumbnail';
 
-const ContactList = ({ contacts }) => (
+const ContactList = ({ contacts, updateContactList }) => (
   <View style={{ flex: 1 }}>
     <FlatList
       numColumns={1}
@@ -33,6 +33,7 @@ ContactList.propTypes = {
     phoneNumber: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   })).isRequired,
+  updateContactList: PropTypes.func.isRequired,
 };
 
 export default ContactList;

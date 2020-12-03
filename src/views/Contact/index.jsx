@@ -18,17 +18,19 @@ class Contact extends React.Component {
 
   componentDidMount() {
     const contactInfo = this.props.navigation.state.params;
+    // console.log(this.props.navigation.state.params);
     this.setState({
       contactId: contactInfo.contactId,
       contactName: contactInfo.contactName,
       contactPhoneNumber: contactInfo.contactPhoneNumber,
       contactImage: contactInfo.contactImage,
-    });
+      updateContactList: contactInfo.updateContactList,
+    }, () => {console.log(this.state)});
   }
 
   render() {
     const {
-      contactId, contactName, contactPhoneNumber, contactImage,
+      contactId, contactName, contactPhoneNumber, contactImage, updateContactList
     } = this.state;
     return (
       <ContactProfile
@@ -36,6 +38,7 @@ class Contact extends React.Component {
         name={contactName}
         phoneNumber={contactPhoneNumber}
         image={contactImage}
+        updateContactList={updateContactList}
       />
       // <View style={{ flex: 1 }}>
       //   <Image

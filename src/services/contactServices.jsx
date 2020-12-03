@@ -55,6 +55,15 @@ export const writeContactToFile = async (contact) => {
   }));
 };
 
+export const editContactFile = async (contact) => {
+  const fileName = (contact.name.replace(/\s+/g, '-').toLowerCase() + contact.phoneNumber.replace(/-/g, ''));
+  const fileUri = `${contactDirectory}/${fileName}.json`;
+  await onException(() => FileSystem.deleteAsync(fileUri));
+  await onException(() => FileSystem.writeAsStringAsync(fileUri, JSON.stringify(contact), {
+    encoding: FileSystem.EncodingType.UTF8,
+  }));
+};
+
 export const getAllContacts = async () => {
   const { status } = await Contacts.requestPermissionsAsync();
   if (status === 'granted') {

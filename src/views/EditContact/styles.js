@@ -25,4 +25,16 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: 28,
   },
+  profileImage: {
+    marginLeft: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  icon: {
+    backgroundColor: '#ccc',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
 });
