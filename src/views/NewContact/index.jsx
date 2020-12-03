@@ -4,11 +4,7 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { writeContactToFile } from '../../services/contactServices';
-// import { NavigationEvents } from 'react-navigation';
-// import Toolbar from '../../components/Toolbar';
 import styles from './styles';
-
-
 
 class NewContact extends React.Component {
   constructor(props) {

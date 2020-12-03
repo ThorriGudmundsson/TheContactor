@@ -30,7 +30,6 @@ class Contact extends React.Component {
     const {
       contactId, contactName, contactPhoneNumber, contactImage,
     } = this.state;
-    console.log(contactImage);
     return (
       <ContactProfile
         id={contactId}

@@ -14,8 +14,7 @@ class EditContact extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text> This will be NewContact view </Text>
-
+        <Text> This will be EditContact view </Text>
       </View>
     );
   }

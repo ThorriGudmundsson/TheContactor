@@ -86,16 +86,12 @@ export const getAllContacts = async () => {
   return [];
 };
 
-<<<<<<< HEAD
-
-export const sortContacts = async(contacts) => {
-  console.log('Halló nú byrjum við----------------');
-  const contactsSorted = contacts.sort(Intl.Collator().compare);
-  // console.log(contactsSorted);
-  return contactsSorted;
-
-=======
 export const sortContacts = async (contacts) => {
-  console.log(contacts);
->>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
+  const sortedContacts = [...contacts];
+  sortedContacts.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+    return 0;
+  });
+  return sortedContacts;
 };

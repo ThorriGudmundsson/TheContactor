@@ -3,21 +3,21 @@ import {
   View, TouchableHighlight,
 } from 'react-native';
 import PropTypes from 'prop-types';
-// import { NavigationEvents } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
-// import Search from '../SearchBar';
 
 function findNextId(contacts) {
-  let nextid = 0;
-  contacts.forEach((contact) => {
-    const idcheck = Number(contact.id);
-    nextid = idcheck + 1;
-  });
-  return nextid;
+  // let nextid = 0;
+  // contacts.forEach((contact) => {
+  //   const idcheck = Number(contact.id);
+  //   nextid += idcheck + 1;
+  // });
+  const nextid = Math.max(...contacts.map((contact) => contact.Number(contact.id)));
+  console.log(nextid);
+  // return nextid;
 }
 
 class Contacts extends React.Component {
@@ -35,36 +35,27 @@ class Contacts extends React.Component {
 
   async componentDidMount() {
     const contacts = await getAllContacts();
-<<<<<<< HEAD
     const sortedContacts = await sortContacts(contacts);
     console.log('This is it!!!!!');
-    console.log(sortedContacts);
-=======
-    // await sortContacts(contacts);
->>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
+    // console.log(sortedContacts);
     this.setState({
-      contacts,
+      contacts: sortedContacts,
     });
   }
 
-  updateContactList(newContact) {
+  async updateContactList(newContact) {
     const newContactArray = this.state.contacts.concat(newContact);
-    this.setState({ contacts: newContactArray });
+    const sortedContacts = await sortContacts(newContactArray);
+    this.setState({ contacts: sortedContacts });
   }
 
-  updateSearch(text) {
+  async updateSearch(text) {
     const filteredContacts = this.state.contacts.filter(
-      (contact) => sortContacts(contact.name.toLowerCase().startsWith(text)),
+      (contact) => contact.name.toLowerCase().startsWith(text),
     );
-<<<<<<< HEAD
-
-    // console.log(this.state.contacts);
-    // console.log(searchText);
-    // console.log(filteredContacts);
-=======
->>>>>>> d3a4173b56570c6827a707c1af979d46b19dc887
+    const sortedContacts = await sortContacts(filteredContacts);
     this.setState({
-      filteredContacts,
+      filteredContacts: sortedContacts,
       searchText: text,
     });
   }
