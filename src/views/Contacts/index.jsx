@@ -37,7 +37,7 @@ class Contacts extends React.Component {
   }
 
   async onEditedContact(newContact) {
-    console.log('CONTACTS VIEW ONEDITEDCONTACT');
+    console.log('CONTACTS VIEW ON-EDITED-CONTACT');
     console.log(newContact);
     const editContactArray = this.state.contacts;
     for (let i = 0; i < editContactArray.length; i += 1) {

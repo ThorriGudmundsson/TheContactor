@@ -44,7 +44,7 @@ class EditContact extends React.Component {
     };
     editContactFile(editedContact, oldContact);
 
-    this.props.navigation.state.params.onEditedContact(editedContact);
+    this.props.navigation.state.params.updateContact(editedContact);
     this.props.navigation.goBack();
   }
 

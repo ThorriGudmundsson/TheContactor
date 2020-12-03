@@ -12,11 +12,12 @@ const ContactThumbnail = ({
   <TouchableOpacity
     activeOpacity={0.7}
     onPress={() => navigate('Contact', {
+      onEditedContact,
       contactId: id,
       contactName: name,
       contactPhoneNumber: phoneNumber,
       contactImage: image,
-      onEditedContact,
+      // onEditedContact,
     })}
   >
     <View style={styles.contactThumbnailContainer}>

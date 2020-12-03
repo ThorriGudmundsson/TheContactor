@@ -18,7 +18,7 @@ class Contact extends React.Component {
       phoneNumber: '',
       image: '',
     };
-    this.onEditedContact = this.onEditedContact.bind(this);
+    this.updateContact = this.updateContact.bind(this);
   }
 
   componentDidMount() {
@@ -28,10 +28,11 @@ class Contact extends React.Component {
       name: contactInfo.contactName,
       phoneNumber: contactInfo.contactPhoneNumber,
       image: contactInfo.contactImage,
+      onEditedContact: this.props.navigation.state.params.onEditedContact,
     });
   }
 
-  async onEditedContact(newContact) {
+  async updateContact(newContact) {
     this.setState({
       id: newContact.id,
       name: newContact.name,
@@ -39,7 +40,8 @@ class Contact extends React.Component {
       image: newContact.image,
     });
     console.log(newContact);
-    return newContact;
+    console.log(this.props.navigation.state.params.onEditedContact);
+    this.props.navigation.state.params.onEditedContact(newContact);
   }
 
   render() {
@@ -47,7 +49,6 @@ class Contact extends React.Component {
       id, name, phoneNumber, image,
     } = this.state;
     const { onEditedContact } = this.props.navigation.state.params;
-    console.log(phoneNumber);
     return (
       <View style={{ flex: 1 }}>
         <Image
@@ -61,7 +62,7 @@ class Contact extends React.Component {
           size={30}
           color="black"
           onPress={() => this.props.navigation.navigate('EditContact', {
-            onEditedContact: this.onEditedContact,
+            updateContact: this.updateContact,
             id,
             name,
             phoneNumber,
