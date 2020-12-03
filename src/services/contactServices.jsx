@@ -86,15 +86,12 @@ export const getAllContacts = async () => {
   return [];
 };
 
-
-export const sortContacts = async(contacts) => {
-  console.log('Halló nú byrjum við----------------');
+export const sortContacts = async (contacts) => {
   const sortedContacts = [...contacts];
   sortedContacts.sort((a, b) => {
-    console.log('blabla')
-    const bla = a.name.localCompare(b.name);
-    console.log(bla);
-    return bla;
-  })
-  // console.log(contactsSorted);
-}
+    if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+    return 0;
+  });
+  return sortedContacts;
+};
