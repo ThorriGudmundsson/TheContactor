@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import {
+  View, Text, Image, TouchableOpacity,
+} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import styles from './styles';
+import { makeCall } from '../../makePhoneCall/phoneCall';
 
 const ContactProfile = ({
   id, name, phoneNumber, image, navigation: { navigate },
@@ -31,9 +34,13 @@ const ContactProfile = ({
       <Text style={styles.mobileTextStyle}>
         Phone:
       </Text>
-      <Text style={styles.numberTextStyle}>
-        {phoneNumber}
-      </Text>
+      <TouchableOpacity onPress={makeCall}>
+
+        <Text style={styles.numberTextStyle}>
+          {phoneNumber}
+        </Text>
+      </TouchableOpacity>
+
     </View>
   </View>
 );
