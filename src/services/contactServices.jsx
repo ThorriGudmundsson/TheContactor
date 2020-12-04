@@ -57,6 +57,16 @@ export const writeContactToFile = async (contact) => {
   }));
 };
 
+export const deleteContactFile = async (oldContact) => {
+   // console.log(oldContact);
+  // console.log(newContact);
+  const oldFileName = (oldContact.name.replace(/\s+/g, '-').toLowerCase() + oldContact.phoneNumber.replace(/-/g, ''));
+  const oldFileUri = `${contactDirectory}/${oldFileName}.json`;
+   console.log(await FileSystem.readDirectoryAsync(contactDirectory));
+  await onException(() => FileSystem.deleteAsync(oldFileUri));
+  console.log(await FileSystem.readDirectoryAsync(contactDirectory));
+};
+
 export const editContactFile = async (newContact, oldContact) => {
   // console.log(oldContact);
   // console.log(newContact);

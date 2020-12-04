@@ -1,6 +1,6 @@
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity} from 'react-native';
 import Modal from '../Modal';
 import styles from './styles';
 
@@ -9,6 +9,7 @@ const AddModal = ({ isOpen, closeModal, takePhoto, selectFromCameraRoll }) => (
     isOpen={isOpen}
     closeModal={closeModal}
   >
+
     <TouchableOpacity onPress={takePhoto}>
       <Entypo style={styles.icon} name="camera" />
     </TouchableOpacity>
