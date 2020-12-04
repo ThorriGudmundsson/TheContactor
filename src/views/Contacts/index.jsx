@@ -9,6 +9,7 @@ import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 
+
 function findNextId(contacts) {
   let nextid = 0;
   contacts.forEach((contact) => {
@@ -17,6 +18,7 @@ function findNextId(contacts) {
     }
   });
   nextid += 1;
+
   return nextid.toString();
 }
 
