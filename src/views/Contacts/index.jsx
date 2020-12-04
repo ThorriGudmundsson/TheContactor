@@ -10,8 +10,8 @@ import ContactList from '../../components/Contacts/ContactList';
 import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 
-
 function findNextId(contacts) {
+  // find the id with the higest number and return one higer
   let nextid = 0;
   contacts.forEach((contact) => {
     if (Number(contact.id) > nextid) {
@@ -19,7 +19,6 @@ function findNextId(contacts) {
     }
   });
   nextid += 1;
-
   return nextid.toString();
 }
 
@@ -31,6 +30,7 @@ class Contacts extends React.Component {
       contacts: [],
       searchText: '',
       filteredContacts: null,
+      dontAddNow: false, // used to disable plus buttom when refrache contacts
 
     };
     this.updateContactList = this.updateContactList.bind(this);
@@ -48,11 +48,13 @@ class Contacts extends React.Component {
   }
 
   async forcingReload() {
+    this.setState( {dontAddNow: true,})
     console.log('Force Reload');
     const contacts = await getAllContacts();
     const sortedContacts = await sortContacts(contacts);
     this.setState({
       contacts: sortedContacts,
+      dontAddNow: false,
     });
   }
 
@@ -116,6 +118,7 @@ class Contacts extends React.Component {
             />
           </View>
           <TouchableHighlight
+            disabled={this.state.dontAddNow}
             onPress={() => this.props.navigation.navigate('NewContact', {
               nextId: findNextId(contacts), updateContactList: this.updateContactList,
             })}
