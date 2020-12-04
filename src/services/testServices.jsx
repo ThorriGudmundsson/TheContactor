@@ -5,7 +5,7 @@ const rootDir = `${FileSystem.documentDirectory}`; // the root uri
 export const whatever = FileSystem.getInfoAsync(rootDir); // the root info
 
 const uriDirectory = `${FileSystem.documentDirectory}testDir`; // DIRECTORY NAME
-const cDirectory = `${FileSystem.documentDirectory}contacts`
+const cDirectory = `${FileSystem.documentDirectory}contacts`;
 
 export const writeSomething = async () => {
   const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
@@ -14,15 +14,12 @@ export const writeSomething = async () => {
     await FileSystem.makeDirectoryAsync(uriDirectory);
   }
 
-
   const somefile = `${uriDirectory}/thefile.txt`; // FILE NAME and uri
   const sometext = 'Her have some text been written'; // the file content
 
   await FileSystem.writeAsStringAsync(somefile, sometext); // write and overwrite the file
 
   console.log(await FileSystem.readAsStringAsync(somefile)); // read the file
-
-
 };
 
 export const killit = async () => {
@@ -36,18 +33,13 @@ export const killit = async () => {
 };
 
 export const testsomthing = async () => {
-  //const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
+  // const theDirectory = await FileSystem.getInfoAsync(uriDirectory);
 
   console.log(rootDir); // read the file
   const tt = await FileSystem.readDirectoryAsync(cDirectory);
   console.log(tt[0]);
 
-
   const somefile = `${cDirectory}/${tt[3]}`; // FILE NAME and uri
 
   console.log(await FileSystem.readAsStringAsync(somefile)); // read the file
-
-
-
-
 };

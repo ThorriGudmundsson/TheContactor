@@ -17,7 +17,7 @@ class EditContact extends React.Component {
       id: '',
       name: '',
       phoneNumber: '',
-      image: 'noimage', // to avoid emty uri statement
+      image: 'noimage', // to avoid empty uri statement
       oldContact: {},
       isAddModalOpen: false,
       isDelModalOpen: false,
@@ -50,7 +50,7 @@ class EditContact extends React.Component {
     };
     editContactFile(editedContact, oldContact);
 
-    this.props.navigation.state.params.updateContact(editedContact); // refreche the contact view
+    this.props.navigation.state.params.updateContact(editedContact); // refresh the contact view
     this.props.navigation.goBack();
   }
 

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
-import { getAllContacts, sortContacts, cleanDirectory } from '../../services/contactServices';
+import { getAllContacts, sortContacts } from '../../services/contactServices';
 import styles from './styles';
 
 function findNextId(contacts) {
@@ -33,9 +33,7 @@ class Contacts extends React.Component {
       dontAddNow: false, // used to disable plus buttom when refrache contacts
 
     };
-    this.updateContactList = this.updateContactList.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
-    this.onEditedContact = this.onEditedContact.bind(this);
   }
 
   async componentDidMount() {
@@ -48,7 +46,7 @@ class Contacts extends React.Component {
   }
 
   async forcingReload() {
-    this.setState( {dontAddNow: true,})
+    this.setState({ dontAddNow: true });
     console.log('Force Reload');
     const contacts = await getAllContacts();
     const sortedContacts = await sortContacts(contacts);
@@ -56,29 +54,6 @@ class Contacts extends React.Component {
       contacts: sortedContacts,
       dontAddNow: false,
     });
-  }
-
-  async onEditedContact(newContact) {
-    console.log('RUNNING onEditedContact');
-    /* console.log('CONTACTS VIEW ONEDITEDCONTACT');
-    console.log(newContact);
-    const editContactArray = this.state.contacts;
-    for (let i = 0; i < editContactArray.length; i += 1) {
-      if (editContactArray[i].id === newContact.id) {
-        editContactArray[i] = newContact;
-        break;
-      }
-    }
-    const sortedContacts = await sortContacts(editContactArray);
-    //console.log(sortedContacts);
-    this.setState({ contact: sortedContacts }); */
-  }
-
-  async updateContactList(newContact) {
-    console.log('RUNNING updateContactList');
-    /* const newContactArray = this.state.contacts.concat(newContact);
-    const sortedContacts = await sortContacts(newContactArray);
-    this.setState({ contacts: sortedContacts }); */
   }
 
   async updateSearch(text) {
@@ -119,9 +94,7 @@ class Contacts extends React.Component {
           </View>
           <TouchableHighlight
             disabled={this.state.dontAddNow}
-            onPress={() => this.props.navigation.navigate('NewContact', {
-              nextId: findNextId(contacts), updateContactList: this.updateContactList,
-            })}
+            onPress={() => this.props.navigation.navigate('NewContact', { nextId: findNextId(contacts) })}
             style={styles.plusButton}
           >
             <AntDesign name="pluscircle" style={styles.plusIcon} />
