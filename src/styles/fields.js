@@ -30,7 +30,6 @@ export default StyleSheet.create({
     height: 40,
     backgroundColor: '#A1B078',
 
-
   },
   topSaveButtonText: {
     fontSize: 20,

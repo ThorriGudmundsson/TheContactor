@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View, TouchableHighlight,
 } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
@@ -28,6 +29,7 @@ class Contacts extends React.Component {
       contacts: [],
       searchText: '',
       filteredContacts: null,
+
     };
     this.updateContactList = this.updateContactList.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -35,6 +37,16 @@ class Contacts extends React.Component {
   }
 
   async componentDidMount() {
+    console.log('Mounting');
+    const contacts = await getAllContacts();
+    const sortedContacts = await sortContacts(contacts);
+    this.setState({
+      contacts: sortedContacts,
+    });
+  }
+
+  async forcingReload() {
+    console.log('Force Reload');
     const contacts = await getAllContacts();
     const sortedContacts = await sortContacts(contacts);
     this.setState({
@@ -43,7 +55,8 @@ class Contacts extends React.Component {
   }
 
   async onEditedContact(newContact) {
-    console.log('CONTACTS VIEW ON-EDITED-CONTACT');
+    console.log('RUNNING onEditedContact');
+    /* console.log('CONTACTS VIEW ONEDITEDCONTACT');
     console.log(newContact);
     const editContactArray = this.state.contacts;
     for (let i = 0; i < editContactArray.length; i += 1) {
@@ -53,14 +66,15 @@ class Contacts extends React.Component {
       }
     }
     const sortedContacts = await sortContacts(editContactArray);
-    console.log(sortedContacts);
-    this.setState({ contact: sortedContacts });
+    //console.log(sortedContacts);
+    this.setState({ contact: sortedContacts }); */
   }
 
   async updateContactList(newContact) {
-    const newContactArray = this.state.contacts.concat(newContact);
+    console.log('RUNNING updateContactList');
+    /* const newContactArray = this.state.contacts.concat(newContact);
     const sortedContacts = await sortContacts(newContactArray);
-    this.setState({ contacts: sortedContacts });
+    this.setState({ contacts: sortedContacts }); */
   }
 
   async updateSearch(text) {
@@ -85,6 +99,10 @@ class Contacts extends React.Component {
     }
     return (
       <View style={{ flex: 1 }}>
+        <NavigationEvents
+        // payload can give some info about where from
+          onWillFocus={() => this.forcingReload()}
+        />
 
         <View style={styles.listHead}>
           <View style={{ width: '75%' }}>
@@ -107,7 +125,7 @@ class Contacts extends React.Component {
 
         <ContactList
           contacts={contacts}
-          updateContactList={this.onEditedContact}
+          // updateContactList={this.onEditedContact}
         />
       </View>
     );

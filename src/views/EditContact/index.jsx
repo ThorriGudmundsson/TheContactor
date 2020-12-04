@@ -17,7 +17,7 @@ class EditContact extends React.Component {
       id: '',
       name: '',
       phoneNumber: '',
-      image: 'noimage', // to avoid emty uri statements
+      image: '',
       oldContact: {},
       isAddModalOpen: false,
     };

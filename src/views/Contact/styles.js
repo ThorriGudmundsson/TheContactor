@@ -1,34 +1,42 @@
 import { StyleSheet } from 'react-native';
+import fieldsStyles from '../../styles/fields';
 
 export default StyleSheet.create({
+  ...fieldsStyles,
   nameStyle: {
-    fontSize: 22,
+    fontSize: 28,
     textAlign: 'center',
-    fontWeight: 'bold',
-    margin: 20,
+    fontWeight: '200',
+    color: '#7BA112',
+    marginTop: 50,
   },
   phoneNumberStyle: {
+    flexDirection: 'row',
     padding: 20,
-    margin: 10,
+    marginTop: 50,
+    marginHorizontal:10,
     borderRadius: 20,
-    backgroundColor: '#f0f8ff',
+    backgroundColor: '#dbebd1',
   },
   mobileTextStyle: {
-    fontSize: 16,
+    flexDirection: 'column',
+    fontSize: 30,
   },
   numberTextStyle: {
-    color: 'blue',
-    fontSize: 18,
+    flexDirection: 'column',
+    color: '#303F07',
+    marginLeft: 30,
+    fontSize: 22,
   },
   editButton: {
     alignSelf: 'flex-end',
-    margin: 10,
+    color: '#303F07',
   },
   image: {
     alignSelf: 'center',
-    width: 70,
-    height: 70,
-    margin: 10,
-    borderRadius: 50,
+    width: 200,
+    height: 200,
+    marginTop: -20,
+    borderRadius: 100,
   },
 });
