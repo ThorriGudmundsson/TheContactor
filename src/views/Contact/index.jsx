@@ -14,7 +14,7 @@ class Contact extends React.Component {
       id: '',
       name: '',
       phoneNumber: '',
-      image: '',
+      image: 'noimage', // to avoid emty uri statements
     };
     this.updateContact = this.updateContact.bind(this);
   }
