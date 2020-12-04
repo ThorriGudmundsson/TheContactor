@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  View, Text, Image, TouchableOpacity, TouchableHighlight,
+  View, Text, Image, TouchableOpacity,
 } from 'react-native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import styles from './styles';
-// import ContactProfile from '../../components/Contacts/ContactProfile';
 import CallContact from '../../components/makePhoneCall/phoneCall';
-// import { getAllContacts } from '../../services/contactServices';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -28,7 +26,6 @@ class Contact extends React.Component {
       name: contactInfo.contactName,
       phoneNumber: contactInfo.contactPhoneNumber,
       image: contactInfo.contactImage,
-      onEditedContact: this.props.navigation.state.params.onEditedContact,
     });
   }
 
@@ -39,16 +36,12 @@ class Contact extends React.Component {
       phoneNumber: newContact.phoneNumber,
       image: newContact.image,
     });
-    console.log(newContact);
-    console.log(this.props.navigation.state.params.onEditedContact);
-    this.props.navigation.state.params.onEditedContact(newContact);
   }
 
   render() {
     const {
       id, name, phoneNumber, image,
     } = this.state;
-    const { onEditedContact } = this.props.navigation.state.params;
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.topSaveButton}>
@@ -58,7 +51,7 @@ class Contact extends React.Component {
             size={30}
             color="black"
             onPress={() => this.props.navigation.navigate('EditContact', {
-              onEditedContact: this.onEditedContact,
+              updateContact: this.updateContact,
               id,
               name,
               phoneNumber,
