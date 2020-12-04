@@ -50,7 +50,7 @@ export const readContactsFromFile = async () => {
 // Write a new contact to the contact directory
 export const writeContactToFile = async (contact) => {
   if (contact.image === '') { contact.image = defaultImage; }
-  const fileName = (contact.name.replace(/\s+/g, '-').toLowerCase() + contact.phoneNumber.replace(/-/g, ''));
+  const fileName = (`${contact.name.replace(/\s+/g, '-').toLowerCase()}-${contact.phoneNumber.replace(/-/g, '')}-${contact.id}`)
   const fileUri = `${contactDirectory}/${fileName}.json`;
   await onException(() => FileSystem.writeAsStringAsync(fileUri, JSON.stringify(contact), {
     encoding: FileSystem.EncodingType.UTF8,
@@ -58,23 +58,19 @@ export const writeContactToFile = async (contact) => {
 };
 
 export const deleteContactFile = async (oldContact) => {
-   // console.log(oldContact);
-  // console.log(newContact);
-  const oldFileName = (oldContact.name.replace(/\s+/g, '-').toLowerCase() + oldContact.phoneNumber.replace(/-/g, ''));
+  const oldFileName = (`${oldContact.name.replace(/\s+/g, '-').toLowerCase()}-${oldContact.phoneNumber.replace(/-/g, '')}-${oldContact.id}`);
   const oldFileUri = `${contactDirectory}/${oldFileName}.json`;
-   console.log(await FileSystem.readDirectoryAsync(contactDirectory));
+  console.log(await FileSystem.readDirectoryAsync(contactDirectory));
   await onException(() => FileSystem.deleteAsync(oldFileUri));
   console.log(await FileSystem.readDirectoryAsync(contactDirectory));
 };
 
 export const editContactFile = async (newContact, oldContact) => {
-  // console.log(oldContact);
-  // console.log(newContact);
-  const oldFileName = (oldContact.name.replace(/\s+/g, '-').toLowerCase() + oldContact.phoneNumber.replace(/-/g, ''));
+  const oldFileName = (`${oldContact.name.replace(/\s+/g, '-').toLowerCase()}-${oldContact.phoneNumber.replace(/-/g, '')}-${oldContact.id}`);
   const oldFileUri = `${contactDirectory}/${oldFileName}.json`;
   await onException(() => FileSystem.deleteAsync(oldFileUri));
 
-  const newFileName = (newContact.name.replace(/\s+/g, '-').toLowerCase() + newContact.phoneNumber.replace(/-/g, ''));
+  const newFileName = (`${newContact.name.replace(/\s+/g, '-').toLowerCase()}-${newContact.phoneNumber.replace(/-/g, '')}-${newContact.id}`);
   const newFileUri = `${contactDirectory}/${newFileName}.json`;
   await onException(() => FileSystem.writeAsStringAsync(newFileUri, JSON.stringify(newContact), {
     encoding: FileSystem.EncodingType.UTF8,

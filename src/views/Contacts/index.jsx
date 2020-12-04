@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { AntDesign } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/Contacts/ContactList';
-import { getAllContacts, sortContacts } from '../../services/contactServices';
+import { getAllContacts, sortContacts, cleanDirectory } from '../../services/contactServices';
 import styles from './styles';
 
 function findNextId(contacts) {
@@ -130,7 +130,6 @@ class Contacts extends React.Component {
 
         <ContactList
           contacts={contacts}
-          // updateContactList={this.onEditedContact}
         />
       </View>
     );

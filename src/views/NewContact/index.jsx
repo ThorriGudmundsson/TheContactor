@@ -38,7 +38,6 @@ class NewContact extends React.Component {
     };
     writeContactToFile(newContact);
 
-    this.props.navigation.state.params.updateContactList(newContact);
     this.props.navigation.goBack();
   }
 

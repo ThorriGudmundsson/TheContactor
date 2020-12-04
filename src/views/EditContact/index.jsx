@@ -3,9 +3,8 @@ import {
   View, Text, TouchableHighlight, TextInput, Image,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-//import { Icon } from 'react-native-elements';
 import AddModal from '../../components/AddModal';
-import DelModal from '../../components/DelModal'
+import DelModal from '../../components/DelModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageServices';
 import { editContactFile, deleteContactFile } from '../../services/contactServices';
 import styles from './styles';
@@ -51,21 +50,14 @@ class EditContact extends React.Component {
     };
     editContactFile(editedContact, oldContact);
 
-    this.props.navigation.state.params.onEditedContact(editedContact); // refreche the contact view
+    this.props.navigation.state.params.updateContact(editedContact); // refreche the contact view
     this.props.navigation.goBack();
   }
 
-
-    onDel(oldContact) {
-
-      deleteContactFile(oldContact);
-      //console.log('delete something', oldContact)
-      this.props.navigation.navigate('Contacts')
-    }
-
-
-
-
+  onDel(oldContact) {
+    deleteContactFile(oldContact);
+    this.props.navigation.navigate('Contacts');
+  }
 
   genericInputHandler(name, value) {
     this.setState({ [name]: value });
@@ -85,7 +77,7 @@ class EditContact extends React.Component {
 
   render() {
     const {
-      id, name, phoneNumber, image, oldContact, isAddModalOpen,isDelModalOpen
+      id, name, phoneNumber, image, oldContact, isAddModalOpen, isDelModalOpen,
     } = this.state;
     return (
       <View>
@@ -114,7 +106,6 @@ class EditContact extends React.Component {
           <AntDesign name="camera" style={styles.cameraIcon} />
 
         </TouchableHighlight>
-
 
         <TextInput
           style={styles.inputfield}
@@ -145,7 +136,6 @@ class EditContact extends React.Component {
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableHighlight>
 
-
         <AddModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({ isAddModalOpen: false })}
@@ -157,7 +147,13 @@ class EditContact extends React.Component {
           onPress={() => this.setState({ isDelModalOpen: true })}
           style={styles.deleteButton}
         >
-          <Text style={styles.saveButtonText}><AntDesign name="delete" style={styles.trash} /> delete {name}</Text>
+          <Text style={styles.saveButtonText}>
+            <AntDesign name="delete" style={styles.trash} />
+            {' '}
+            Delete
+            {' '}
+            {name}
+          </Text>
         </TouchableHighlight>
         <DelModal
           isOpen={isDelModalOpen}
