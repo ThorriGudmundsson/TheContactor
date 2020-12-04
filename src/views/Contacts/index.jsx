@@ -81,7 +81,7 @@ class Contacts extends React.Component {
 
   async updateSearch(text) {
     const filteredContacts = this.state.contacts.filter(
-      (contact) => contact.name.toLowerCase().startsWith(text),
+      (contact) => contact.name.toLowerCase().startsWith(text.toLowerCase()),
     );
     const sortedContacts = await sortContacts(filteredContacts);
     this.setState({
