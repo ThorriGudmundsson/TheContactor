@@ -3,7 +3,6 @@ import {
   View, Text, TouchableHighlight, TextInput, Image,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { Icon } from 'react-native-elements';
 import AddModal from '../../components/AddModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageServices';
 import { editContactFile } from '../../services/contactServices';
@@ -47,7 +46,7 @@ class EditContact extends React.Component {
     };
     editContactFile(editedContact, oldContact);
 
-    this.props.navigation.state.params.onEditedContact(editedContact);
+    this.props.navigation.state.params.updateContact(editedContact);
     this.props.navigation.goBack();
   }
 
@@ -96,9 +95,7 @@ class EditContact extends React.Component {
           style={styles.cameraButton}
         >
           <AntDesign name="camera" style={styles.cameraIcon} />
-
         </TouchableHighlight>
-
 
         <TextInput
           style={styles.inputfield}

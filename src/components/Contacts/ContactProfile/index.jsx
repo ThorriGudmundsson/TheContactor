@@ -9,7 +9,7 @@ import styles from './styles';
 import { makeCall } from '../../makePhoneCall/phoneCall';
 
 const ContactProfile = ({
-  id, name, phoneNumber, image, updateContactList, navigation: { navigate },
+  id, name, phoneNumber, image, navigation: { navigate },
 }) => (
   <View style={{ flex: 1 }}>
     <Image
@@ -27,7 +27,6 @@ const ContactProfile = ({
         contactName: name,
         contactPhoneNumber: phoneNumber,
         contactImage: image,
-        updateContactList,
       })}
     />
     <Text style={styles.nameStyle}>{name}</Text>
@@ -51,7 +50,6 @@ ContactProfile.propTypes = {
   name: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  updateContactList: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

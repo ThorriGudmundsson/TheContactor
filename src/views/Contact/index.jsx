@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  View, Text, Image, TouchableOpacity, TouchableHighlight
+  View, Text, Image, TouchableOpacity,
 } from 'react-native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import styles from './styles';
-// import ContactProfile from '../../components/Contacts/ContactProfile';
 import CallContact from '../../components/makePhoneCall/phoneCall';
-//import { getAllContacts } from '../../services/contactServices';
 
 class Contact extends React.Component {
   constructor(props) {
@@ -18,7 +16,7 @@ class Contact extends React.Component {
       phoneNumber: '',
       image: '',
     };
-    this.onEditedContact = this.onEditedContact.bind(this);
+    this.updateContact = this.updateContact.bind(this);
   }
 
   componentDidMount() {
@@ -31,23 +29,19 @@ class Contact extends React.Component {
     });
   }
 
-  async onEditedContact(newContact) {
+  async updateContact(newContact) {
     this.setState({
       id: newContact.id,
       name: newContact.name,
       phoneNumber: newContact.phoneNumber,
       image: newContact.image,
     });
-    console.log(newContact);
-    return newContact;
   }
 
   render() {
     const {
       id, name, phoneNumber, image,
     } = this.state;
-    const { onEditedContact } = this.props.navigation.state.params;
-    console.log(phoneNumber);
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.topSaveButton}>
@@ -57,14 +51,14 @@ class Contact extends React.Component {
             size={30}
             color="black"
             onPress={() => this.props.navigation.navigate('EditContact', {
-              onEditedContact: this.onEditedContact,
+              updateContact: this.updateContact,
               id,
               name,
               phoneNumber,
               image,
             })}
-      />
-      </View>
+          />
+        </View>
         <Image
           style={styles.image}
           resizeMode="cover"
@@ -74,7 +68,8 @@ class Contact extends React.Component {
 
         <TouchableOpacity
           style={styles.phoneNumberStyle}
-          onPress={() => CallContact(phoneNumber)}>
+          onPress={() => CallContact(phoneNumber)}
+        >
 
           <AntDesign name="phone" style={styles.mobileTextStyle} />
 
